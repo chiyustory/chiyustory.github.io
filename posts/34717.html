@@ -6,22 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chiyustory.github.io">
-  <title>test1 | 池鱼的故事</title>
+  <title>编译及链接工程库 | 池鱼的故事</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="test1">
+  <meta name="description" content="工程库​    算法工程师的输出内容往往是需要将自己的算法（检测、跟踪、分类、分割等）编译成工程库（静态库、动态库）部署到嵌入式设备端或者服务器端，如此做的目的是为了保证工程目录下各个算法模块的独立性，便于维护。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test1">
-<meta property="og:url" content="https://chiyustory.github.io/posts/51385.html">
+<meta property="og:title" content="编译及链接工程库">
+<meta property="og:url" content="https://chiyustory.github.io/posts/34717.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="test1">
+<meta property="og:description" content="工程库​    算法工程师的输出内容往往是需要将自己的算法（检测、跟踪、分类、分割等）编译成工程库（静态库、动态库）部署到嵌入式设备端或者服务器端，如此做的目的是为了保证工程目录下各个算法模块的独立性，便于维护。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-10-10T12:29:26.000Z">
-<meta property="article:modified_time" content="2020-10-10T12:30:43.893Z">
+<meta property="og:image" content="https://chiyustory.github.io/images/image-20201018095324551.png">
+<meta property="og:image" content="https://chiyustory.github.io/images/image-20201018095850466.png">
+<meta property="og:image" content="https://chiyustory.github.io/images/image-20201018100029601.png">
+<meta property="og:image" content="https://chiyustory.github.io/images/image-20201018100157401.png">
+<meta property="og:image" content="https://chiyustory.github.io/images/image-20201018100458496.png">
+<meta property="article:published_time" content="2020-10-18T00:46:41.000Z">
+<meta property="article:modified_time" content="2020-10-18T03:53:51.593Z">
 <meta property="article:author" content="ChiYu">
-<meta property="article:tag" content="杂记">
+<meta property="article:tag" content="工程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chiyustory.github.io/images/image-20201018095324551.png">
   
     <link rel="alternative" href="/atom.xml" title="池鱼的故事" type="application/atom+xml">
   
@@ -174,14 +180,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-编译及链接工程库" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      test1
+      编译及链接工程库
     </h1>
   
 
@@ -193,8 +199,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/posts/51385.html" class="archive-article-date">
-        <time datetime="2020-10-10T12:29:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-10</time>
+<a href="/posts/34717.html" class="archive-article-date">
+        <time datetime="2020-10-18T00:46:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-18</time>
 </a>
 
   
@@ -207,7 +213,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1字</span>
+      <span class="post-count">1.1k字</span>
     </span>
   </span>
 
@@ -216,7 +222,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">4分</span>
     </span>
   </span>
 </div>
@@ -227,8 +233,83 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>test1</p>
+    <h4 id="工程库"><a href="#工程库" class="headerlink" title="工程库"></a>工程库</h4><p>​    算法工程师的输出内容往往是需要将自己的算法（检测、跟踪、分类、分割等）编译成工程库（静态库、动态库）部署到嵌入式设备端或者服务器端，如此做的目的是为了保证工程目录下各个算法模块的独立性，便于维护。</p>
 <a id="more"></a>
+
+<p>​    生成可执行文件的过程如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">预编译--&gt;编译</span><br><span class="line">编译--&gt;链接</span><br><span class="line">动态库--&gt;链接</span><br><span class="line">静态库--&gt;链接</span><br></pre></td></tr></table></figure>
+
+<p>​    动态库与静态库是提前编译好的，其区别也就是在链接过程。若链接的是静态库，则将编译生成的二进制文件与静态库一块打包生成可执行文件，程序在运行时将不需要再使用到此静态库；若链接的是动态库，则同样将编译生成的二进制文件与动态库一块打包生成可执行文件，但是在程序运行时仍需要使用到此动态库。具体区别如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">变量</th>
+<th align="center">静态库</th>
+<th align="center">动态库</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">文件后缀</td>
+<td align="center">lib(Linux)、a(Win)</td>
+<td align="center">so(Linux)、dll(Win)</td>
+</tr>
+<tr>
+<td align="center">文件大小</td>
+<td align="center">更大</td>
+<td align="center">更小</td>
+</tr>
+<tr>
+<td align="center">输出文件</td>
+<td align="center">test.lib</td>
+<td align="center">test.lib+test.dll，此处的test.lib与静态库不同，其仅包含函数及变量的声明</td>
+</tr>
+<tr>
+<td align="center">文件升级</td>
+<td align="center">重新编译生成可执行文件</td>
+<td align="center">替换动态库</td>
+</tr>
+</tbody></table>
+<h4 id="Win平台"><a href="#Win平台" class="headerlink" title="Win平台"></a>Win平台</h4><p>​    在Win平台上的开发，往往借助IDE，比如VisualStudio，仅需设置输出格式或者链接路径即可。</p>
+<h5 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h5><p>​    编译静态库，仅需在常规属性页面上，修改目标文件名（库名称）和配置配型（输出后缀），如下是编译静态库，动态库操作仍如此：</p>
+<img src="../images/image-20201018095324551.png" alt="image-20201018095324551" style="zoom:70%;" />
+
+<h5 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h5><p>​    首先指定输出格式为可执行文件：</p>
+<img src="../images/image-20201018095850466.png" alt="image-20201018095850466" style="zoom:70%;" />
+
+<p>​    链接静态库，需要指定：链接库的头文件、链接库的目录、链接库的名称，仍然是在属性界面，修改C/C++及链接器界面：</p>
+<p>​                                                            <img src="../images/image-20201018100029601.png" alt="image-20201018100029601" style="zoom:70%;" /></p>
+<img src="../images/image-20201018100157401.png" alt="image-20201018100157401" style="zoom:70%;" />
+
+<img src="../images/image-20201018100458496.png" alt="image-20201018100458496" style="zoom:70%;" />
+
+<p>​    <strong>注：</strong>在链接动态库的时候，可执行文件必须和dll文件需在同一目录，而其对应的lib文件则不需在同一目录下。</p>
+<h4 id="Linux平台"><a href="#Linux平台" class="headerlink" title="Linux平台"></a>Linux平台</h4><p>​    在Win平台，编译和链接过程IDE已经帮我们做了，而在Linux平台下，我们则需自食其力。假设仅基于gcc/g++编译器，则首先基于编译命令将各个源文件生成目标文件（.o），然后基于链接命令链接各个库获得可执行文件。在终端上一个个命令的巧也是极不便利的，因此就有了Makefile，将这些命令集合起来，因此只需要编写Makefile文件就可实现编译及链接的过程。而对于大型工程来说，Makefile的易读性又是不便利的，因此就有了CmakeLists，基于cmake语法编写CmakeLists将会为我们自动生成Makefile，cmake极大的简化了我们的编译过程。</p>
+<h5 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h5><p>​    在工程目录下，建立lib目录及build目录，并在lib目录下建立CmakeLists.txt，编译动态库和静态库需修改add_library的第二个参数，内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(lib_src library.c)</span><br><span class="line"><span class="comment"># 编译动态库 </span></span><br><span class="line"><span class="keyword">add_library</span>(library SHARED <span class="variable">$&#123;lib_src&#125;</span>)</span><br><span class="line"><span class="comment"># 编译静态库</span></span><br><span class="line"><span class="comment"># add_library(library STATIC $&#123;lib_src&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p>​    在工程目录下，建立CmakeLists.txt，内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(library)</span><br><span class="line"><span class="keyword">set</span>(lib_list <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib)</span><br><span class="line"><span class="keyword">set</span>(lib_dir <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/library)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;lib_list&#125;</span> <span class="variable">$&#123;lib_dir&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    在buile目录下，进行外部编译（在此目录下将获得自动生成的Makefile）：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong></p>
+<p>cmake语法命令大小写都是支持的；</p>
+<p>cmake需要在各个有源文件的目录下建立CmakeLists.txt，这样可方便管理各个目录；</p>
+<h5 id="链接-1"><a href="#链接-1" class="headerlink" title="链接"></a>链接</h5><p>​    在工程目录下，建立src目录及build目录，并在src目录下建立CmakeLists.txt，内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(lib_inc <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib/library.h)</span><br><span class="line"><span class="keyword">set</span>(lib_file <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/library/liblibrary.so)</span><br><span class="line"><span class="keyword">include_directories</span>(<span class="variable">$&#123;lib_inc&#125;</span>)</span><br><span class="line"><span class="keyword">add_executable</span>(demo main.c)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(%&#123;lib_file&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>​    在工程目录下，建立CmakeLists.txt，内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(demo)</span><br><span class="line"><span class="keyword">set</span>(src_list <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/src)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(bin_dir <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/bin)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(<span class="variable">$&#123;src_list&#125;</span> <span class="variable">$&#123;bin_dir&#125;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>​    在buile目录下，进行外部编译：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<h5 id="cmake语法"><a href="#cmake语法" class="headerlink" title="cmake语法"></a>cmake语法</h5><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 隐式变量</span></span><br><span class="line"><span class="keyword">message</span>(STATUS “This is Soruce dir” <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS “This is BINARY dir” <span class="variable">$&#123;PROJECT_BINARY_DIR&#125;</span>)</span><br><span class="line"><span class="comment"># 向当前工程添加存放源文件的子目录及输出目录</span></span><br><span class="line"><span class="keyword">add_subdirectory</span>(sub_dir binary_dir)</span><br><span class="line"><span class="comment"># 构建库</span></span><br><span class="line"><span class="keyword">add_library</span>(library STATIC lib_dir)</span><br><span class="line"><span class="comment"># 头文件搜索目录</span></span><br><span class="line"><span class="keyword">include_directories</span>(dir1 dir2)</span><br><span class="line"><span class="comment"># 链接库</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(demo library1 library2)</span><br><span class="line"><span class="comment"># 生成可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(demo main.c)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>​    </p>
 
     
 
@@ -243,13 +324,13 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://chiyustory.github.io/posts/51385.html" title="test1" target="_blank">https://chiyustory.github.io/posts/51385.html</a>
+          <a href="https://chiyustory.github.io/posts/34717.html" title="编译及链接工程库" target="_blank">https://chiyustory.github.io/posts/34717.html</a>
         </li>
         
         <li>
           <strong>版权声明： </strong>
           
-          请转载时携带作者信息，非常谢谢！
+          请转载时携带作者信息，非常感谢！
         </li>
         
       </ul>
@@ -265,7 +346,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工程</a>
         		</li>
       		
 		</ul>
@@ -321,7 +402,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/51385.html" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/34717.html" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -371,7 +452,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018-2020 <a href="https://chiyustory.github.io/" target="_blank">ChiYu</a>
+    		&copy; 2020 <a href="https://chiyustory.github.io/" target="_blank">ChiYu</a>
     	</div>
       	<div class="footer-right">
 			
