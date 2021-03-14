@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。 YOLO系列算法对比如下：    Algorithm Preprocess Backbone Neck Loss NMS Active    YOLOV3 图像变换 CBL、Re">
+  <meta name="description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YOLO系列算法">
 <meta property="og:url" content="https://chiyustory.github.io/posts/5269.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。 YOLO系列算法对比如下：    Algorithm Preprocess Backbone Neck Loss NMS Active    YOLOV3 图像变换 CBL、Re">
+<meta property="og:description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chiyustory.github.io/images/preprocess.PNG">
 <meta property="og:image" content="https://chiyustory.github.io/images/YOLOV3.jpg">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://chiyustory.github.io/images/CIOU.png">
 <meta property="og:image" content="https://chiyustory.github.io/images/CIOU_v.png">
 <meta property="article:published_time" content="2021-03-14T06:13:30.000Z">
-<meta property="article:modified_time" content="2021-03-14T06:13:44.768Z">
+<meta property="article:modified_time" content="2021-03-14T06:14:44.250Z">
 <meta property="article:author" content="ChiYu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -238,6 +238,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。</p>
+<a id="more"></a>
+
 <p><strong>YOLO系列算法对比如下：</strong></p>
 <table>
 <thead>
