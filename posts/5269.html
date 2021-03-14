@@ -10,12 +10,12 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="YOLO系列算法介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。">
+  <meta name="description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。 YOLO系列算法对比如下：    Algorithm Preprocess Backbone Neck Loss NMS Active    YOLOV3 图像变换 CBL、Re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="YOLO系列算法">
 <meta property="og:url" content="https://chiyustory.github.io/posts/5269.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="YOLO系列算法介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。">
+<meta property="og:description" content="介绍YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。 YOLO系列算法对比如下：    Algorithm Preprocess Backbone Neck Loss NMS Active    YOLOV3 图像变换 CBL、Re">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chiyustory.github.io/images/preprocess.PNG">
 <meta property="og:image" content="https://chiyustory.github.io/images/YOLOV3.jpg">
@@ -26,10 +26,10 @@
 <meta property="og:image" content="https://chiyustory.github.io/images/DIOU_loss.jpg">
 <meta property="og:image" content="https://chiyustory.github.io/images/CIOU.png">
 <meta property="og:image" content="https://chiyustory.github.io/images/CIOU_v.png">
-<meta property="article:published_time" content="2021-03-13T04:54:43.000Z">
-<meta property="article:modified_time" content="2021-03-13T04:55:32.986Z">
+<meta property="article:published_time" content="2021-03-14T06:13:30.000Z">
+<meta property="article:modified_time" content="2021-03-14T06:13:44.768Z">
 <meta property="article:author" content="ChiYu">
-<meta property="article:tag" content="计算机视觉 嵌入式">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://chiyustory.github.io/images/preprocess.PNG">
   
@@ -204,7 +204,7 @@
         </span>
 
 <a href="/posts/5269.html" class="archive-article-date">
-        <time datetime="2021-03-13T04:54:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
+        <time datetime="2021-03-14T06:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
 </a>
 
   
@@ -237,9 +237,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="YOLO系列算法"><a href="#YOLO系列算法" class="headerlink" title="YOLO系列算法"></a>YOLO系列算法</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。</p>
-<a id="more"></a>
-
+    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。</p>
 <p><strong>YOLO系列算法对比如下：</strong></p>
 <table>
 <thead>
@@ -294,11 +292,14 @@
 <p><strong>Mish</strong></p>
 <p>相比于LeakyRelu激活函数，Mish是个非单调函数，且更加光滑，而平滑的激活函数允许更好的信息深入神经网络，从而得到更好的准确性和泛化性。但是，其计算复杂度也更高一些，会降低训练速度。</p>
 <h5 id="网络结构图"><a href="#网络结构图" class="headerlink" title="网络结构图"></a>网络结构图</h5><p>图片源自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143747206">https://zhuanlan.zhihu.com/p/143747206</a></p>
-<img src="..\images\YOLOV3.jpg" alt="YOLOV3" style="zoom: 50%;" />
+<p>YOLOV3</p>
+<img src="..\images\YOLOV3.jpg" alt="YOLOV3" style="zoom: 33%;" />
 
-<img src="..\images\YOLOV4.jpg" alt="YOLOV4" style="zoom: 50%;" />
+<p>YOLOV4</p>
+<img src="..\images\YOLOV4.jpg" alt="YOLOV4" style="zoom: 33%;" />
 
-<img src="..\images\YOLOV5.jpg" alt="YOLOV5" style="zoom: 50%;" />
+<p>YOLOV5</p>
+<img src="..\images\YOLOV5.jpg" alt="YOLOV5" style="zoom: 33%;" />
 
 <p>基于以上网络结构，可获得如下信息：</p>
 <ul>
@@ -321,7 +322,7 @@
 <h5 id="IOU损失"><a href="#IOU损失" class="headerlink" title="IOU损失"></a>IOU损失</h5><p>目标检测任务的损失是由两部分组成，一部分是分类损失（交叉熵损失函数），另一部分是回归损失（V3使用的是L2损失，V4和V5使用的是CIOU损失）。</p>
 <p><strong>IOU损失</strong></p>
 <p>以预测框和真实框的IOU作为损失</p>
-<img src="..\images/IOU_loss.jpg" style="zoom:50%;" />
+<img src="..\images/IOU_loss.jpg" style="zoom: 33%;" />
 
 <p>但是存在如下无法解决的问题：</p>
 <ul>
@@ -330,7 +331,7 @@
 </ul>
 <p><strong>GIOU损失</strong></p>
 <p>GIOU损失加入两个框的并集情况，当两框相交但位置不同时，会产生不一样的差值；当两框不相交时，则会产生更大的差集；</p>
-<img src="../images/GIOU_loss.jpg" style="zoom:50%;" />
+<img src="../images/GIOU_loss.jpg" style="zoom: 33%;" />
 
 <p>但是存在如下无法解决的问题：</p>
 <ul>
@@ -338,7 +339,7 @@
 </ul>
 <p><strong>DIOU损失</strong></p>
 <p>DIOU损失加入两个框的中心点欧式距离（感知位置差异）和外接矩形对角线距离（相当于外接矩形）；</p>
-<img src="../images/DIOU_loss.jpg" style="zoom:50%;" />
+<img src="../images/DIOU_loss.jpg" style="zoom: 33%;" />
 
 <p>但是存在如下无法解决的问题：</p>
 <ul>
@@ -393,6 +394,17 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     

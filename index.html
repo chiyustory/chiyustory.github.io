@@ -196,7 +196,7 @@
   
   
 <a href="/posts/5269.html" class="archive-article-date">
-        <time datetime="2021-03-13T04:54:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-13</time>
+        <time datetime="2021-03-14T06:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
 </a>
 
   
@@ -208,10 +208,133 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h3 id="YOLO系列算法"><a href="#YOLO系列算法" class="headerlink" title="YOLO系列算法"></a>YOLO系列算法</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。</p>
-    
-    <a class="article-more-a" href="/posts/5269.html#more">more >></a>
-    
+    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>YOLO系列算法在目标检测领域属于单阶段类，即从输入到输出单向推理。另外，其以网格单元输出预测的形式，非常有利于提升检测效果。因此，在工业界，YOLO系列算法可以算是一个主要的选择，本文就是对YOLO系列算法的总结。</p>
+<p><strong>YOLO系列算法对比如下：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">Algorithm</th>
+<th>Preprocess</th>
+<th>Backbone</th>
+<th>Neck</th>
+<th>Loss</th>
+<th>NMS</th>
+<th>Active</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">YOLOV3</td>
+<td>图像变换</td>
+<td>CBL、ResX</td>
+<td>FPN</td>
+<td>L2</td>
+<td>NMS</td>
+<td>LeakyRelu</td>
+</tr>
+<tr>
+<td align="center">YOLOV4</td>
+<td>Mosaic</td>
+<td>CBL、CSPX、CBM</td>
+<td>SPP、FPN+PAN</td>
+<td>CIOU</td>
+<td>DIOU_NMS</td>
+<td>Mish、LeakyRelu</td>
+</tr>
+<tr>
+<td align="center">YOLOv5</td>
+<td>Mosaic</td>
+<td>CBL、CSP1_X、CSP2_X</td>
+<td>SPP、FPN+PAN</td>
+<td>CIOU</td>
+<td>加权_NMS</td>
+<td>LeakyRelu</td>
+</tr>
+</tbody></table>
+<h4 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h4><h5 id="Mosaic"><a href="#Mosaic" class="headerlink" title="Mosaic"></a>Mosaic</h5><p>Mosaic数据增强是参考CutMix提出的，CutMix是将对两张图进行组合，即其中一张图随机裁剪后贴在另一张图上，获得一张目标图像。而Mosaic是对四张图进行组合，即对所有图进行随机裁剪、随机缩放、随机排布，获得一张目标图像。</p>
+<img src="..\images\preprocess.PNG" alt="preprocess" style="zoom: 67%;" />
+
+<p>Mosaic的优势：</p>
+<ul>
+<li>将图像进行缩小，增强出更多的小目标数据集，有利于小目标检测；</li>
+<li>将4张图像进行组合，即real_batch=batch*4，增大了训练BatchSize，有利于加快训练速度；</li>
+</ul>
+<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p><strong>LeakyRelu</strong></p>
+<p>相比于Relu激活函数，当输入为正时，可得到1的梯度；当输入为负数时，可得到lamda的梯度，仍然可以更新权重。但是，在整个期间，梯度的值并不是连续的。</p>
+<p><strong>Mish</strong></p>
+<p>相比于LeakyRelu激活函数，Mish是个非单调函数，且更加光滑，而平滑的激活函数允许更好的信息深入神经网络，从而得到更好的准确性和泛化性。但是，其计算复杂度也更高一些，会降低训练速度。</p>
+<h5 id="网络结构图"><a href="#网络结构图" class="headerlink" title="网络结构图"></a>网络结构图</h5><p>图片源自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143747206">https://zhuanlan.zhihu.com/p/143747206</a></p>
+<p>YOLOV3</p>
+<img src="..\images\YOLOV3.jpg" alt="YOLOV3" style="zoom: 33%;" />
+
+<p>YOLOV4</p>
+<img src="..\images\YOLOV4.jpg" alt="YOLOV4" style="zoom: 33%;" />
+
+<p>YOLOV5</p>
+<img src="..\images\YOLOV5.jpg" alt="YOLOV5" style="zoom: 33%;" />
+
+<p>基于以上网络结构，可获得如下信息：</p>
+<ul>
+<li>整体pipeline一致，都是沿用backbone-&gt;neck-&gt;head的网络结构；</li>
+<li>V4和V5的backbone都应用了CSPNet的结构，只是具体结构不同；</li>
+<li>V4和V5的neck都应用了PANet的结构；</li>
+<li>V3、V4和V5都采用了SPP模块；</li>
+</ul>
+<p><strong>CSPNet</strong></p>
+<p>CSPNet解决的是三个问题：</p>
+<ul>
+<li>提升CNN的能力，即使轻量化网络结构，也不会导致效果下降太多；做法是在每个block中，首先将特征图拆分成两部分，其中一个分支经过DenseBlock之后，最后将两个分支进行concat，如此使得梯度流产生更多的组合方式；Transition层也是为了使得两个分支的特征差异更大，而不会学到重复的梯度信息；</li>
+<li>减少计算复杂度；做法是在每个block中，输入到DenseBlock的特征图通道已经被减半了，如此降低计算复杂度；</li>
+<li>减少空间复杂度；做法是在每个block中，输入到DenseBlock的特征图通道已经被减半了，如此也会降低空间复杂度；</li>
+</ul>
+<p><strong>SPP</strong></p>
+<p>SPP模块是以不同的池化窗口（5x5、7x7、13x13）获得不同感受野大小的特征图，然后将所有特征图进行concat，如此比单纯的一次池化操作可获得更加丰富的特征信息。</p>
+<p><strong>FPN+PAN</strong></p>
+<p>此模块的目的是为了生成不同尺度的金字塔特征图，可用于识别不同尺度大小的目标。FPN将语义特征从上至下通过上采样与backbone特征融合进行传递，PAN又将定位特征从下至上通过与FPN特征融合进行传递；</p>
+<h5 id="IOU损失"><a href="#IOU损失" class="headerlink" title="IOU损失"></a>IOU损失</h5><p>目标检测任务的损失是由两部分组成，一部分是分类损失（交叉熵损失函数），另一部分是回归损失（V3使用的是L2损失，V4和V5使用的是CIOU损失）。</p>
+<p><strong>IOU损失</strong></p>
+<p>以预测框和真实框的IOU作为损失</p>
+<img src="..\images/IOU_loss.jpg" style="zoom: 33%;" />
+
+<p>但是存在如下无法解决的问题：</p>
+<ul>
+<li>预测框与真实框不相交时，损失值为常数，无法更新优化预测位置；</li>
+<li>预测框与真实框相交时，且位置不同时，但是其IOU却一样，IOU损失对此优化幅度是一样的；</li>
+</ul>
+<p><strong>GIOU损失</strong></p>
+<p>GIOU损失加入两个框的并集情况，当两框相交但位置不同时，会产生不一样的差值；当两框不相交时，则会产生更大的差集；</p>
+<img src="../images/GIOU_loss.jpg" style="zoom: 33%;" />
+
+<p>但是存在如下无法解决的问题：</p>
+<ul>
+<li>当预测框在真实框内部时，预测框处于不同位置时，IOU相同，但是差集并不能感知到差异；</li>
+</ul>
+<p><strong>DIOU损失</strong></p>
+<p>DIOU损失加入两个框的中心点欧式距离（感知位置差异）和外接矩形对角线距离（相当于外接矩形）；</p>
+<img src="../images/DIOU_loss.jpg" style="zoom: 33%;" />
+
+<p>但是存在如下无法解决的问题：</p>
+<ul>
+<li>当预测框在真实框内部中心点欧式距离一样时，且IOU相同，但形状不同；</li>
+</ul>
+<p><strong>CIOU损失</strong></p>
+<p>CIOU损失加入预测框和真实框的宽高比；</p>
+<p><img src="../images/CIOU.png"></p>
+<p><img src="../images/CIOU_v.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bbox_iou</span>(<span class="params">box1, box2, GIoU=False, DIoU=False, CIoU=False, eps=<span class="number">1e-7</span></span>):</span></span><br><span class="line">    b1_x1, b1_x2 = box1[<span class="number">0</span>] - box1[<span class="number">2</span>] / <span class="number">2</span>, box1[<span class="number">0</span>] + box1[<span class="number">2</span>] / <span class="number">2</span></span><br><span class="line">    b1_y1, b1_y2 = box1[<span class="number">1</span>] - box1[<span class="number">3</span>] / <span class="number">2</span>, box1[<span class="number">1</span>] + box1[<span class="number">3</span>] / <span class="number">2</span></span><br><span class="line">    b2_x1, b2_x2 = box2[<span class="number">0</span>] - box2[<span class="number">2</span>] / <span class="number">2</span>, box2[<span class="number">0</span>] + box2[<span class="number">2</span>] / <span class="number">2</span></span><br><span class="line">    b2_y1, b2_y2 = box2[<span class="number">1</span>] - box2[<span class="number">3</span>] / <span class="number">2</span>, box2[<span class="number">1</span>] + box2[<span class="number">3</span>] / <span class="number">2</span></span><br><span class="line">    <span class="comment"># Intersection area</span></span><br><span class="line">    inter = (torch.min(b1_x2, b2_x2) - torch.max(b1_x1, b2_x1)).clamp(<span class="number">0</span>) * \</span><br><span class="line">            (torch.min(b1_y2, b2_y2) - torch.max(b1_y1, b2_y1)).clamp(<span class="number">0</span>)</span><br><span class="line">    <span class="comment"># Union Area</span></span><br><span class="line">    w1, h1 = b1_x2 - b1_x1, b1_y2 - b1_y1 + eps</span><br><span class="line">    w2, h2 = b2_x2 - b2_x1, b2_y2 - b2_y1 + eps</span><br><span class="line">    union = w1 * h1 + w2 * h2 - inter + eps</span><br><span class="line">    iou = inter / union</span><br><span class="line">    <span class="keyword">if</span> GIoU <span class="keyword">or</span> DIoU <span class="keyword">or</span> CIoU:</span><br><span class="line">        cw = torch.max(b1_x2, b2_x2) - torch.min(b1_x1, b2_x1)  <span class="comment"># convex (smallest enclosing box) width</span></span><br><span class="line">        ch = torch.max(b1_y2, b2_y2) - torch.min(b1_y1, b2_y1)  <span class="comment"># convex height</span></span><br><span class="line">        <span class="keyword">if</span> CIoU <span class="keyword">or</span> DIoU:  <span class="comment"># Distance or Complete IoU https://arxiv.org/abs/1911.08287v1</span></span><br><span class="line">            c2 = cw ** <span class="number">2</span> + ch ** <span class="number">2</span> + eps  <span class="comment"># convex diagonal squared</span></span><br><span class="line">            rho2 = ((b2_x1 + b2_x2 - b1_x1 - b1_x2) ** <span class="number">2</span> +</span><br><span class="line">                    (b2_y1 + b2_y2 - b1_y1 - b1_y2) ** <span class="number">2</span>) / <span class="number">4</span>  <span class="comment"># center distance squared</span></span><br><span class="line">            <span class="keyword">if</span> DIoU:</span><br><span class="line">                <span class="keyword">return</span> iou - rho2 / c2  <span class="comment"># DIoU</span></span><br><span class="line">            <span class="keyword">elif</span> CIoU:  <span class="comment"># https://github.com/Zzh-tju/DIoU-SSD-pytorch/blob/master/utils/box/box_utils.py#L47</span></span><br><span class="line">                v = (<span class="number">4</span> / math.pi ** <span class="number">2</span>) * torch.pow(torch.atan(w2 / h2) - torch.atan(w1 / h1), <span class="number">2</span>)</span><br><span class="line">                <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">                    alpha = v / (v - iou + (<span class="number">1</span> + eps))</span><br><span class="line">                <span class="keyword">return</span> iou - (rho2 / c2 + v * alpha)  <span class="comment"># CIoU</span></span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># GIoU https://arxiv.org/pdf/1902.09630.pdf</span></span><br><span class="line">            c_area = cw * ch + eps  <span class="comment"># convex area</span></span><br><span class="line">            <span class="keyword">return</span> iou - (c_area - union) / c_area  <span class="comment"># GIoU</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> iou  <span class="comment"># IoU</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Head</strong></p>
+<p>V3、V4、V5都是使用相同的Head层，后处理的方式也是一样的</p>
+<ul>
+<li>Reshape输出特征图维度：BxCxHxW=&gt;Bx(anchor_numx(5+cls_num))xHxW</li>
+<li>Swap输出特征图维度：Bx(anchor_num(x5+cls_num))xHxW=&gt;BxHxWx(anchor_numx(5+cls_num))</li>
+<li>Reshape输出特征维度：BxHxWx(anchor_numx(5+cls_num))=&gt;Bx(HxWxanchor_num)x(5+cls_num)</li>
+<li>预测坐标偏移量、预测框置信度、预测类别概率Sigmoid归一化</li>
+<li>转换Anchor框到输出特征图维度</li>
+<li>计算预测框坐标，并将其恢复到输入尺度</li>
+<li>删除低于置信度阈值的预测框</li>
+<li>NMS（DIOU_NMS、加权NMS）去除重叠的预测框</li>
+</ul>
+
     
 
     
@@ -222,6 +345,17 @@
   <div class="article-info article-info-index">
     
     
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
     
 
     
