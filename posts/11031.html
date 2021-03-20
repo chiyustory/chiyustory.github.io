@@ -6,44 +6,33 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chiyustory.github.io">
-  <title>深度学习的损失函数 | 池鱼的故事</title>
+  <title>知识蒸馏算法 | 池鱼的故事</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="介绍传统图像算法中，如边缘检测等算法都是通过人为设定滤波器提取出目标，而神经网络则不同，其是希望可自动学习滤波器来提取出目标，实现此目的则必然需要引入反馈机制更新滤波器的参数，损失函数则是扮演这个衡量对与错的角色。">
+  <meta name="description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。所以，针对手机等设备的算法应运而生，如MobileNet、ShuffleNet等，其主要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习的损失函数">
-<meta property="og:url" content="https://chiyustory.github.io/posts/56651.html">
+<meta property="og:title" content="知识蒸馏算法">
+<meta property="og:url" content="https://chiyustory.github.io/posts/11031.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="介绍传统图像算法中，如边缘检测等算法都是通过人为设定滤波器提取出目标，而神经网络则不同，其是希望可自动学习滤波器来提取出目标，实现此目的则必然需要引入反馈机制更新滤波器的参数，损失函数则是扮演这个衡量对与错的角色。">
+<meta property="og:description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。所以，针对手机等设备的算法应运而生，如MobileNet、ShuffleNet等，其主要">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chiyustory.github.io/images/CNN.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/CrossEntropy.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/LabelSmooth_qi.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/LabelSmooth_pi.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/LabelSmooth.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CFocalLoss.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/CenterLossNet.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/CrossEntrpy+CenterLoss.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/CenterLoss_gradient.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/Constrastive_1.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/Contrastive_2.png">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CContrastive_3.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/Tripliet_dis.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/TripletLoss.png">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CTriHardLoss.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/MSE.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/MSE_.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/MAE.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/MAE_.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/Huber.png">
-<meta property="og:image" content="https://chiyustory.github.io/images/Huber_.png">
-<meta property="article:published_time" content="2021-03-17T14:52:04.000Z">
-<meta property="article:modified_time" content="2021-03-17T14:52:56.367Z">
+<meta property="og:image" content="https://chiyustory.github.io/images/KD_general.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/KD_catogory.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/SoftTarget_1.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_t.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_s.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_L.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/PKT.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/PKT_cos.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/conditional_prob.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/PKT_KL.jpg">
+<meta property="article:published_time" content="2021-03-20T14:00:46.000Z">
+<meta property="article:modified_time" content="2021-03-20T14:01:04.107Z">
 <meta property="article:author" content="ChiYu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chiyustory.github.io/images/CNN.jpg">
+<meta name="twitter:image" content="https://chiyustory.github.io/images/KD_general.jpg">
   
     <link rel="alternative" href="/atom.xml" title="池鱼的故事" type="application/atom+xml">
   
@@ -196,14 +185,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-深度学习的损失函数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-知识蒸馏算法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      深度学习的损失函数
+      知识蒸馏算法
     </h1>
   
 
@@ -215,8 +204,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/posts/56651.html" class="archive-article-date">
-        <time datetime="2021-03-17T14:52:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
+<a href="/posts/11031.html" class="archive-article-date">
+        <time datetime="2021-03-20T14:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
 </a>
 
   
@@ -229,7 +218,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">2k字</span>
+      <span class="post-count">1.6k字</span>
     </span>
   </span>
 
@@ -249,133 +238,61 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>传统图像算法中，如边缘检测等算法都是通过人为设定滤波器提取出目标，而神经网络则不同，其是希望可自动学习滤波器来提取出目标，实现此目的则必然需要引入反馈机制更新滤波器的参数，损失函数则是扮演这个衡量对与错的角色。</p>
+    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。所以，针对手机等设备的算法应运而生，如MobileNet、ShuffleNet等，其主要依赖于深度可分离卷积层的作用。但是，像HiSi3559A等平台无法支持某些特殊层，此时知识蒸馏算法将是一个不错的选择，将老师模型的知识蒸馏出来，迁移到学生模型中。</p>
 <a id="more"></a>
 
-<p>具体Pipeline如下：</p>
-<img src="..\images\CNN.jpg" style="zoom: 50%;" />
+<p>通用pipeline如下：</p>
+<img src="..\images\KD_general.jpg" style="zoom:67%;" />
 
-<p>深度学习的训练过程中，损失函数将直接决定模型的性能优劣，如下将对计算机视觉领域的不同任务类型损失进行总结。</p>
-<h4 id="分类损失函数"><a href="#分类损失函数" class="headerlink" title="分类损失函数"></a>分类损失函数</h4><p>分类损失函数应用于目标分类，即对CNN中的语义特征进行划分，应用领域：人脸识别，行人属性识别，行人重识别等。</p>
-<p><strong>CrossEntropy</strong></p>
-<p>计算过程如下：</p>
-<ul>
-<li>基于Softmax函数，对神经元的输出进行归一化，即获取预测各类概率；</li>
-<li>计算真实类别对应预测概率的损失值，即概率越大损失值越小；</li>
-</ul>
-<img src="..\images\CrossEntropy.jpg" style="zoom:50%;" />
+<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>论文：《Knowledge Distillation: A Survey  》</p>
+<p>在工业界，知识蒸馏首先将一个网络结构压缩至推理耗时达到设备要求的复杂度，作为学生网络；然后使用高复杂度的老师网络结构去帮助学生去学习。因为，不同规格的网络结构从相同数据量中所能提取的知识量是不同的，如此也会导致老师和学生对新知识的泛化能力具有差异性。因此，知识蒸馏的目的就是让学生模型也能吸收到老师模型的知识量，提升自身的泛化性。目前知识蒸馏的算法众多，基于从老师模型中蒸馏出的内容对蒸馏算法进行分类：</p>
+<img src="..\images\KD_catogory.jpg" style="zoom:80%;" />
 
-<p><strong>LabelSmoothCrossEntropy</strong></p>
-<p>该损失是基于CrossEntropy的改进，修改之处是对one-hot的标签进行平滑化，解决问题是提升模型的泛化性。比如将[0，1，0]的标签转变为[0.033，0.934，0.033]，这样正负样本都可以参与到损失的计算中。one-hot式标签鼓励网络最大限度的往最硬的方向进行学习，如此会降低模型的泛化性，若能兼顾正负样本的学习，有利于特则的多样性学习。</p>
-<p>计算过程如下：</p>
-<ul>
-<li><p>基于Softmax函数，对神经元的输出进行归一化，即获取预测各类概率：</p>
-<img src="..\images\LabelSmooth_qi.jpg" style="zoom:80%;" />
-</li>
-<li><p>标签平滑化（关于标签的平滑有多种方式，平滑的强度也与超参数有关）：</p>
-<img src="..\images\LabelSmooth_pi.jpg" style="zoom:80%;" />
-</li>
-<li><p>计算LabelSmooth损失：</p>
-<img src="..\images\LabelSmooth.jpg" style="zoom:80%;" />
 
-</li>
-</ul>
-<p><strong>FocalLoss</strong></p>
-<p>该损失是基于CrossEntropy的改进，增加了两个权重因子，解决问题是增加了难例样本的优化和样本不平衡的优化。假设alpha=1，gamma=2，使用代数法，若预测概率=0.6，标签=1，则损失=-0.25x0.4^2log0.6；若预测概率=0.9，标签=1，则损失=-0.25x0.1^2log0.9；相比于CrossEntropy，不同预测概率的损失差有很大的差异，即FocalLoss会给前者更大的损失，也即更大的权重更新梯度，将有利于网络挖掘难例特征；假设alpha=0.25，则数据量少的类别会产生更大的损失，将有利于网络挖掘少样本特征。</p>
-<p>计算过程如下：</p>
-<ul>
-<li><p>基于Softmax函数，对神经元的输出进行归一化，即获取预测各类概率；</p>
-</li>
-<li><p>计算正负样本比例，获得alpha因子；</p>
-</li>
-<li><p>设置难例样本的更新幅度因子gamma，计算FocalLoss：</p>
-<p><img src="..%5Cimages%5CFocalLoss.png"></p>
-</li>
-</ul>
-<p><strong>CenterLoss</strong></p>
-<p>论文：《A Discriminative Feature Learning Approach for Deep Face Recognition》</p>
-<p>CenterLoss解决的问题是在CrossEntropy分类的基础之上，减小类内距离。因此，该损失函数包含两部分，CrossEntropy和CenterLoss。简单的理解是，CenterLoss在输出层的前一层加入了一个<strong>逼近类别特征中心的层</strong>（FC，维度自定义），此层的权重参数将属于相同类别的样本拉近，在训练过程中此层可基于梯度反向传播更新，直至达到拉近各类的目的。具体结构如下：</p>
-<img src="..\images\CenterLossNet.jpg"  />
+
+<h5 id="基于网络输出的知识蒸馏"><a href="#基于网络输出的知识蒸馏" class="headerlink" title="基于网络输出的知识蒸馏"></a>基于网络输出的知识蒸馏</h5><p>基于网络输出的知识蒸馏主要思想是学生模型模仿老师模型的输出，即用老师的输出作为学生模型的优化方向，因此就约束老师模型和学生模型具有相同的输出结构，分类任务需要有相同的分类数量，检测任务需要有相同的Head结构（YOLO系列算法），其他任务也是。</p>
+<p><strong>SoftTarget知识蒸馏</strong></p>
+<p>论文：《Distilling the Knowledge in a Neural Network》</p>
+<p>该算法使用老师模型的Softmax输出作为学生模型的标签，即以老师的输出作为指导方向，但是，往往老师也会犯错，因此在损失函数的构建中也会加入学生模型的真实标签。另外，该算法在计算Softmax时引入了一个温度因子T，其目的是增大老师输出层分布的信息熵，让负样本也能参与到损失的计算中【注：此SoftLabel操作并不同于LabelSmooth算法，他们的计算目标是不一样的，一个是预测的标签，一个是真实标签，所以负标签所携带的信息量是不同的】，这是因为负样本的概率分布也能带来对学生模型的指导作用，比如：两中手写体的数字2，一个更加类似3，一个更加类似7，那这个手写体分别对3和7的预测概率是不同的，而对于HardLabel来说，他们会同等对待处理。加入温度因子后的Softmax函数如下：</p>
+<img src="..\images\SoftTarget_1.jpg" style="zoom:80%;" />
+
+<p>若温度因子T=1，则退化为普通的Softmax；若T越大，熵越大，分布越均衡，负样本的概率会越大。</p>
+<p>老师模型参与的损失函数如下：</p>
+<p><img src="..%5Cimages%5CSoftTarget_t.jpg"></p>
+<p>学生模型自己的损失函数如下：</p>
+<p><img src="..%5Cimages%5CSoftTarget_s.jpg"></p>
+<p>最终的损失函数：</p>
+<p><img src="..%5Cimages%5CSoftTarget_L.jpg"></p>
+<p>其中，alpha和betta是损失的平衡权重。一般训练过程中，为了保持两部分损失对梯度的更新幅度相同，需要对SoftTarget部分的损失乘以T^2，此权重是基于对两部分损失分别对学生模型输出层logit的梯度计算推导出的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SoftTarget</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, T</span>):</span></span><br><span class="line">		super(SoftTarget, self).__init__()</span><br><span class="line">		self.T = T</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.kl_div(F.log_softmax(out_s/self.T, dim=<span class="number">1</span>),F.softmax(out_t/self.T, dim=<span class="number">1</span>), reduction=<span class="string">&#x27;batchmean&#x27;</span>)</span><br><span class="line">		<span class="keyword">return</span> loss * self.T * self.T</span><br></pre></td></tr></table></figure>
+
+<p><strong>均方差知识蒸馏</strong></p>
+<p>该损失则是非常直接，直接以老师模型与学生模型的L2距离作为损失来指导学生学习。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MSE</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(Logits, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.mse_loss(out_s, out_t)</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
+
+<h5 id="基于网络特征的知识蒸馏"><a href="#基于网络特征的知识蒸馏" class="headerlink" title="基于网络特征的知识蒸馏"></a>基于网络特征的知识蒸馏</h5><p>神经网络的优势是可以提取出各个级别的特征，如浅层特征更多的是目标的轮廓和边缘信息，深层特征更多的是目标语义信息，所以老师模型的中间层或输出层提取的特征表示也都可以作为学生网络的指导方向。</p>
+<p><strong>概率分布迁移知识蒸馏</strong></p>
+<p>论文：《Learning Deep Representations with Probabilistic Knowledge Transfer》</p>
+<p>该算法认为现有的算法忽略了老师模型特征空间的几何结构，如流形结构、相邻样本之间的相似性等。因此，该算法则通过匹配老师与学生模型特征空间的概率分布来指导学生学习老师的知识。</p>
+<img src="..\images\PKT.jpg" style="zoom:80%;" />
 
 <p>计算过程如下：</p>
 <ul>
-<li><p>随机初始化类别中心的向量，维度为[num_classes, num_dimentions_of_FC]，对每个类别需要维护一个中心特征向量；</p>
+<li><p>基于Cosine相似性度量函数，分别计算老师模型和学生模型指定层特征空间下相邻样本的相似性；</p>
+<img src="..\images\PKT_cos.jpg" style="zoom:80%;" />
 </li>
-<li><p>计算CrossEntropyLoss和CenterLoss</p>
-<img src="..\images\CrossEntrpy+CenterLoss.jpg" style="zoom:50%;" />
+<li><p>计算相邻样本形成的条件概率分布；</p>
+<img src="..\images\conditional_prob.jpg" style="zoom:80%;" />
 </li>
-<li><p>更新网络权重及特征中心的权重，其中更新特征中心的权重为：</p>
-<img src="..\images\CenterLoss_gradient.jpg" style="zoom: 50%;" />
+<li><p>基于KL散度，计算两个概率分布的差异性作为损失；</p>
+<img src="..\images\PKT_KL.jpg" style="zoom:80%;" />
 
-<p>因为真实标签的存在，每次仅对mini_batch中的每个样本的真实类别对应特征中心进行更新；</p>
+<p>KL散度是量化两种概率分布P和Q之间差异的方式，其是通过使用一个分布Q来近似一个分布P时损失的信息量，而这个信息量就是学生模型距离老师模型之间的差距。</p>
 </li>
 </ul>
-<p>总而言之，CenterLoss通过插入一个FC层和在训练时维护一个特征中心数组，使得插入的FC层能学习到各个类别特征中心的信息，因此在反向传播时需要对此中心进行更新。</p>
-<h4 id="度量损失函数"><a href="#度量损失函数" class="headerlink" title="度量损失函数"></a>度量损失函数</h4><p>度量损失函数应用于对同类别特征，不同类别特征的相似性进行度量，其目的是希望同类别更靠近，异类别更远离。应用领域：人脸识别，行人重识别等。</p>
-<p><strong>ConstrastiveLoss</strong></p>
-<p>论文：《Dimensionality Reduction by Learning an Invariant Mapping》</p>
-<p>该损失是通过随机选取两个样本，并基于各样本的真实标签获得两个样本是否属于同一类别，即Y=1/0。</p>
-<p>计算过程如下（以ReID任务为例）：</p>
-<ul>
-<li><p>计算每两个随机样本经过CNN提取特征的欧式距离；</p>
-<img src="..\images\Constrastive_1.png" style="zoom:80%;" />
-</li>
-<li><p>若两个样本不属于同一类别，则缩小类间距离（如下第一项，单调递增函数，更新范围大）；若两个样本属于同一类别，则缩小类内距离（如下第二项，单调递减函数，更新范围小，有上下限）</p>
-<img src="..\images\Contrastive_2.png" style="zoom:80%;" />
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PKTCosSim</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(PKTCosSim, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, feat_s, feat_t, eps=<span class="number">1e-6</span></span>):</span></span><br><span class="line">		<span class="comment"># Normalize each vector by its norm feat_s:[N,C] feat_t:[N,C]</span></span><br><span class="line">		feat_s_norm = torch.sqrt(torch.sum(feat_s ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_s = feat_s / (feat_s_norm + eps)</span><br><span class="line">		feat_s[feat_s != feat_s] = <span class="number">0</span></span><br><span class="line">		feat_t_norm = torch.sqrt(torch.sum(feat_t ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_t = feat_t / (feat_t_norm + eps)</span><br><span class="line">		feat_t[feat_t != feat_t] = <span class="number">0</span></span><br><span class="line">		<span class="comment"># Calculate the cosine similarity</span></span><br><span class="line">		feat_s_cos_sim = torch.mm(feat_s, feat_s.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		feat_t_cos_sim = torch.mm(feat_t, feat_t.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		<span class="comment"># Scale cosine similarity to [0,1]</span></span><br><span class="line">		feat_s_cos_sim = (feat_s_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		feat_t_cos_sim = (feat_t_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		<span class="comment"># Transform them into probabilities</span></span><br><span class="line">		feat_s_cond_prob = feat_s_cos_sim / torch.sum(feat_s_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		feat_t_cond_prob = feat_t_cos_sim / torch.sum(feat_t_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		<span class="comment"># Calculate the KL-divergence</span></span><br><span class="line">		loss = torch.mean(feat_t_cond_prob * torch.log((feat_t_cond_prob + eps) / (feat_s_cond_prob + eps)))</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
-<p>该损失函数考虑了类间距离与类内距离两种情况的损失情况，损失函数曲线图如下：</p>
-<p><img src="..%5Cimages%5CContrastive_3.png"></p>
-<p><strong>TripletLoss</strong></p>
-<p>论文：《FaceNet: A Unified Embedding for Face Recognition and Clustering》</p>
-<p>该损失与Constrastive相比，选择了三个样本，即首先选择一个样本作为anchor，然后随机选择一个与其同类别的样本构成正样本对，随机选择一个与其异类别的样本构成负样本对。实际上，三个样本所带来的信息比两个样本带来的信息更大，想想若采用两个样本的话则计算损失时仅可获得两个样本是同类或不是同类的信息，而若采用三个样本则计算损失时会同时获得同类的距离和异类的距离，因此信息量更大，梯度更新的更快。</p>
-<img src="..\images\Tripliet_dis.png" style="zoom: 80%;" />
 
-<p>计算过程如下（以ReID任务为例）：</p>
-<ul>
-<li><p>计算三个随机样本经过CNN提取特征的样本对间的欧式距离；</p>
-</li>
-<li><p>若负样本对的距离大于等于正样本的距离+margin，则不产生损失；若负样本对的距离小于正样本对的距离+margin，则产生损失；</p>
-<img src="..\images\TripletLoss.png" style="zoom:80%;" />
-
-</li>
-</ul>
-<p><strong>TriHardLoss</strong></p>
-<p>TriHardLoss是基于TripletLoss增加了选择样本对的约束条件，即在当前batch中所选择正样本对之间的距离和负样本对之间的距离都是最大的，如此可最大化的产生更大的损失：</p>
-<p>计算过程如下（以ReID任务为例）：</p>
-<ul>
-<li><p>设定每个batch的样本数量为PxK，其中P表示P个不同的ID，K表示每个ID对应的K张同ID图像；</p>
-</li>
-<li><p>计算每个样本的正样本对和负样本距离矩阵；</p>
-</li>
-<li><p>为每个样本选择一个距离最大的正样本对和距离最大的负样本对；</p>
-<p><img src="..%5Cimages%5CTriHardLoss.png"></p>
-</li>
-</ul>
-<p><strong>CircleLoss</strong></p>
-<p>pass</p>
-<h4 id="回归损失函数"><a href="#回归损失函数" class="headerlink" title="回归损失函数"></a>回归损失函数</h4><p>在分类任务中，预测值与真实值是离散的数据类型，若预测值与真实值是连续的数据类型，则需使用回归损失函数。</p>
-<p><strong>平均平方误差（L2损失）</strong></p>
-<p>计算预测值与真实值之间差的平方：</p>
-<img src="..\images\MSE.png" style="zoom:80%;" />
-
-<p>损失曲线如下：</p>
-<img src="..\images\MSE_.png" style="zoom:80%;" />
-
-<p><strong>平均绝对值误差（L1损失）</strong></p>
-<p>计算预测值与真实值之间差的绝对值：</p>
-<img src="..\images\MAE.png" style="zoom:80%;" />
-
-<p>损失曲线如下：</p>
-<img src="..\images\MAE_.png" style="zoom:80%;" />
-
-<p><strong>Huber损失</strong></p>
-<p>将L1损失和L2损失进行统一起来，因为L1损失的优点是大梯度，收敛会很快，缺点是在损失靠近0时仍然使用相同的梯度，即无法慢慢达到最小值；L2损失的优点时在损失靠近0时梯度逐渐减小，容易进入全局最小区域，缺点是对损失值计算了平方，导致若有噪声点时，则异常敏感，而出现动荡的现象。因此，Huber损失基于两者的优缺点，进行损失的统一话，即设定截断阈值，在阈值范围下使用不同的损失：</p>
-<img src="..\images\Huber.png" style="zoom:80%;" />
-
-<p>损失曲线如下：</p>
-<img src="..\images\Huber_.png" style="zoom:80%;" />
     
 
     
@@ -389,7 +306,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://chiyustory.github.io/posts/56651.html" title="深度学习的损失函数" target="_blank">https://chiyustory.github.io/posts/56651.html</a>
+          <a href="https://chiyustory.github.io/posts/11031.html" title="知识蒸馏算法" target="_blank">https://chiyustory.github.io/posts/11031.html</a>
         </li>
         
         <li>
@@ -467,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/56651.html" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/11031.html" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -482,18 +399,9 @@
 
 <nav id="article-nav">
   
-    <a href="/posts/11031.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          知识蒸馏算法
-        
-      </div>
-    </a>
   
-  
-    <a href="/posts/5269.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">YOLO系列算法</div>
+    <a href="/posts/56651.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深度学习的损失函数</div>
       <i class="icon-circle-right"></i>
     </a>
   
