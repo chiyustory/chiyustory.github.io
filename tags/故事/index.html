@@ -6,33 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chiyustory.github.io">
-  <title>知识蒸馏算法 | 池鱼的故事</title>
+  <title>Tag: 故事 | 池鱼的故事</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="知识蒸馏算法">
-<meta property="og:url" content="https://chiyustory.github.io/posts/11031.html">
+  <meta name="description" content="一个记录故事的地方">
+<meta property="og:type" content="website">
+<meta property="og:title" content="池鱼的故事">
+<meta property="og:url" content="https://chiyustory.github.io/tags/%E6%95%85%E4%BA%8B/index.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。">
+<meta property="og:description" content="一个记录故事的地方">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chiyustory.github.io/images/KD_general.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/KD_catogory.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/SoftTarget_1.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_t.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_s.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_L.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT_cos.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/conditional_prob.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT_KL.jpg">
-<meta property="article:published_time" content="2021-03-20T14:00:46.000Z">
-<meta property="article:modified_time" content="2021-03-20T14:07:33.891Z">
 <meta property="article:author" content="ChiYu">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="计算机视觉 嵌入式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chiyustory.github.io/images/KD_general.jpg">
   
     <link rel="alternative" href="/atom.xml" title="池鱼的故事" type="application/atom+xml">
   
@@ -191,266 +178,65 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-知识蒸馏算法" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/posts/21887.html" class="archive-article-date">
+        <time datetime="2021-03-20T14:08:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
+</a>
+
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/posts/21887.html" target="_blank">谈谈工业界的AI</a>
   
-    <h1 class="article-title" itemprop="name">
-      知识蒸馏算法
     </h1>
   
 
 
-  
-  
-        
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/posts/11031.html" class="archive-article-date">
-        <time datetime="2021-03-20T14:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
-</a>
-
-  
-  
-    
-<div style="margin-top:10px;">
-  <span class="post-time">
-    <span class="post-meta-item-icon">
-      <!-- fonts.scss -->
-      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
-      <i class="icon-statistics"></i>
-      <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.6k字</span>
-    </span>
-  </span>
-
-  <span class="post-time">
-    &nbsp; | &nbsp;
-    <span class="post-meta-item-icon">
-      <i class="icon-book icon"></i>
-      <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
-    </span>
-  </span>
-</div>
-
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。</p>
-<a id="more"></a>
-
-<p>所以，针对手机等设备的算法应运而生，如MobileNet、ShuffleNet等，其主要依赖于深度可分离卷积层的作用。但是，像HiSi3559A等平台无法支持某些特殊层，此时知识蒸馏算法将是一个不错的选择，将老师模型的知识蒸馏出来，迁移到学生模型中。</p>
-<p>通用pipeline如下：</p>
-<img src="..\images\KD_general.jpg" style="zoom:67%;" />
-
-<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>论文：《Knowledge Distillation: A Survey  》</p>
-<p>在工业界，知识蒸馏首先将一个网络结构压缩至推理耗时达到设备要求的复杂度，作为学生网络；然后使用高复杂度的老师网络结构去帮助学生去学习。因为，不同规格的网络结构从相同数据量中所能提取的知识量是不同的，如此也会导致老师和学生对新知识的泛化能力具有差异性。因此，知识蒸馏的目的就是让学生模型也能吸收到老师模型的知识量，提升自身的泛化性。目前知识蒸馏的算法众多，基于从老师模型中蒸馏出的内容对蒸馏算法进行分类：</p>
-<img src="..\images\KD_catogory.jpg" style="zoom:80%;" />
-
-
-
-<h5 id="基于网络输出的知识蒸馏"><a href="#基于网络输出的知识蒸馏" class="headerlink" title="基于网络输出的知识蒸馏"></a>基于网络输出的知识蒸馏</h5><p>基于网络输出的知识蒸馏主要思想是学生模型模仿老师模型的输出，即用老师的输出作为学生模型的优化方向，因此就约束老师模型和学生模型具有相同的输出结构，分类任务需要有相同的分类数量，检测任务需要有相同的Head结构（YOLO系列算法），其他任务也是。</p>
-<p><strong>SoftTarget知识蒸馏</strong></p>
-<p>论文：《Distilling the Knowledge in a Neural Network》</p>
-<p>该算法使用老师模型的Softmax输出作为学生模型的标签，即以老师的输出作为指导方向，但是，往往老师也会犯错，因此在损失函数的构建中也会加入学生模型的真实标签。另外，该算法在计算Softmax时引入了一个温度因子T，其目的是增大老师输出层分布的信息熵，让负样本也能参与到损失的计算中【注：此SoftLabel操作并不同于LabelSmooth算法，他们的计算目标是不一样的，一个是预测的标签，一个是真实标签，所以负标签所携带的信息量是不同的】，这是因为负样本的概率分布也能带来对学生模型的指导作用，比如：两中手写体的数字2，一个更加类似3，一个更加类似7，那这个手写体分别对3和7的预测概率是不同的，而对于HardLabel来说，他们会同等对待处理。加入温度因子后的Softmax函数如下：</p>
-<img src="..\images\SoftTarget_1.jpg" style="zoom:80%;" />
-
-<p>若温度因子T=1，则退化为普通的Softmax；若T越大，熵越大，分布越均衡，负样本的概率会越大。</p>
-<p>老师模型参与的损失函数如下：</p>
-<p><img src="..%5Cimages%5CSoftTarget_t.jpg"></p>
-<p>学生模型自己的损失函数如下：</p>
-<p><img src="..%5Cimages%5CSoftTarget_s.jpg"></p>
-<p>最终的损失函数：</p>
-<p><img src="..%5Cimages%5CSoftTarget_L.jpg"></p>
-<p>其中，alpha和betta是损失的平衡权重。一般训练过程中，为了保持两部分损失对梯度的更新幅度相同，需要对SoftTarget部分的损失乘以T^2，此权重是基于对两部分损失分别对学生模型输出层logit的梯度计算推导出的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SoftTarget</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, T</span>):</span></span><br><span class="line">		super(SoftTarget, self).__init__()</span><br><span class="line">		self.T = T</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.kl_div(F.log_softmax(out_s/self.T, dim=<span class="number">1</span>),F.softmax(out_t/self.T, dim=<span class="number">1</span>), reduction=<span class="string">&#x27;batchmean&#x27;</span>)</span><br><span class="line">		<span class="keyword">return</span> loss * self.T * self.T</span><br></pre></td></tr></table></figure>
-
-<p><strong>均方差知识蒸馏</strong></p>
-<p>该损失则是非常直接，直接以老师模型与学生模型的L2距离作为损失来指导学生学习。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MSE</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(Logits, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.mse_loss(out_s, out_t)</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
-
-<h5 id="基于网络特征的知识蒸馏"><a href="#基于网络特征的知识蒸馏" class="headerlink" title="基于网络特征的知识蒸馏"></a>基于网络特征的知识蒸馏</h5><p>神经网络的优势是可以提取出各个级别的特征，如浅层特征更多的是目标的轮廓和边缘信息，深层特征更多的是目标语义信息，所以老师模型的中间层或输出层提取的特征表示也都可以作为学生网络的指导方向。</p>
-<p><strong>概率分布迁移知识蒸馏</strong></p>
-<p>论文：《Learning Deep Representations with Probabilistic Knowledge Transfer》</p>
-<p>该算法认为现有的算法忽略了老师模型特征空间的几何结构，如流形结构、相邻样本之间的相似性等。因此，该算法则通过匹配老师与学生模型特征空间的概率分布来指导学生学习老师的知识。</p>
-<img src="..\images\PKT.jpg" style="zoom:80%;" />
-
-<p>计算过程如下：</p>
-<ul>
-<li><p>基于Cosine相似性度量函数，分别计算老师模型和学生模型指定层特征空间下相邻样本的相似性；</p>
-<img src="..\images\PKT_cos.jpg" style="zoom:80%;" />
-</li>
-<li><p>计算相邻样本形成的条件概率分布；</p>
-<img src="..\images\conditional_prob.jpg" style="zoom:80%;" />
-</li>
-<li><p>基于KL散度，计算两个概率分布的差异性作为损失；</p>
-<img src="..\images\PKT_KL.jpg" style="zoom:80%;" />
-
-<p>KL散度是量化两种概率分布P和Q之间差异的方式，其是通过使用一个分布Q来近似一个分布P时损失的信息量，而这个信息量就是学生模型距离老师模型之间的差距。</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PKTCosSim</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(PKTCosSim, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, feat_s, feat_t, eps=<span class="number">1e-6</span></span>):</span></span><br><span class="line">		<span class="comment"># Normalize each vector by its norm feat_s:[N,C] feat_t:[N,C]</span></span><br><span class="line">		feat_s_norm = torch.sqrt(torch.sum(feat_s ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_s = feat_s / (feat_s_norm + eps)</span><br><span class="line">		feat_s[feat_s != feat_s] = <span class="number">0</span></span><br><span class="line">		feat_t_norm = torch.sqrt(torch.sum(feat_t ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_t = feat_t / (feat_t_norm + eps)</span><br><span class="line">		feat_t[feat_t != feat_t] = <span class="number">0</span></span><br><span class="line">		<span class="comment"># Calculate the cosine similarity</span></span><br><span class="line">		feat_s_cos_sim = torch.mm(feat_s, feat_s.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		feat_t_cos_sim = torch.mm(feat_t, feat_t.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		<span class="comment"># Scale cosine similarity to [0,1]</span></span><br><span class="line">		feat_s_cos_sim = (feat_s_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		feat_t_cos_sim = (feat_t_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		<span class="comment"># Transform them into probabilities</span></span><br><span class="line">		feat_s_cond_prob = feat_s_cos_sim / torch.sum(feat_s_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		feat_t_cond_prob = feat_t_cos_sim / torch.sum(feat_t_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		<span class="comment"># Calculate the KL-divergence</span></span><br><span class="line">		loss = torch.mean(feat_t_cond_prob * torch.log((feat_t_cond_prob + eps) / (feat_s_cond_prob + eps)))</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
-
-
-    
-
-    
-
-    
-    <div class="declare"> 
-      <ul class="post-copyright">
-        <li>
-          <strong>本文作者：</strong>
-          ChiYu
-        </li>
-        <li>
-          <strong>本文链接：</strong>
-          <a href="https://chiyustory.github.io/posts/11031.html" title="知识蒸馏算法" target="_blank">https://chiyustory.github.io/posts/11031.html</a>
-        </li>
-        
-        <li>
-          <strong>版权声明： </strong>
+        <div class="article-info info-on-right">
           
-          请转载时携带作者信息，非常感谢！
-        </li>
-        
-      </ul>
-    </div>
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">故事</a>
         		</li>
       		
 		</ul>
 	</div>
 
-    
+          
 
-    
-
-    
-    
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a> -->
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/11031.html" alt="微信分享二维码"> -->
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-
-    
-    <div class="clearfix"></div>
-  </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-<nav id="article-nav">
-  
-    <a href="/posts/21887.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          谈谈工业界的AI
-        
-      </div>
-    </a>
   
   
-    <a href="/posts/56651.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">深度学习的损失函数</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
           </div>
@@ -482,9 +268,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,

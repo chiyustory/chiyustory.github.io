@@ -6,33 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chiyustory.github.io">
-  <title>知识蒸馏算法 | 池鱼的故事</title>
+  <title>谈谈工业界的AI | 池鱼的故事</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。">
+  <meta name="description" content="你听啊秋末的落叶，你听它叹息这离别，只剩我独自领略，海与山 风和月 你听啊冬至的白雪，你听它掩饰着哽咽，在没有你的世界">
 <meta property="og:type" content="article">
-<meta property="og:title" content="知识蒸馏算法">
-<meta property="og:url" content="https://chiyustory.github.io/posts/11031.html">
+<meta property="og:title" content="谈谈工业界的AI">
+<meta property="og:url" content="https://chiyustory.github.io/posts/21887.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="介绍深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。">
+<meta property="og:description" content="你听啊秋末的落叶，你听它叹息这离别，只剩我独自领略，海与山 风和月 你听啊冬至的白雪，你听它掩饰着哽咽，在没有你的世界">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://chiyustory.github.io/images/KD_general.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/KD_catogory.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/SoftTarget_1.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_t.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_s.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/posts/..%5Cimages%5CSoftTarget_L.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT_cos.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/conditional_prob.jpg">
-<meta property="og:image" content="https://chiyustory.github.io/images/PKT_KL.jpg">
-<meta property="article:published_time" content="2021-03-20T14:00:46.000Z">
-<meta property="article:modified_time" content="2021-03-20T14:07:33.891Z">
+<meta property="article:published_time" content="2021-03-20T14:08:22.000Z">
+<meta property="article:modified_time" content="2021-03-21T03:26:22.384Z">
 <meta property="article:author" content="ChiYu">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="故事">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chiyustory.github.io/images/KD_general.jpg">
   
     <link rel="alternative" href="/atom.xml" title="池鱼的故事" type="application/atom+xml">
   
@@ -191,14 +180,14 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-知识蒸馏算法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-谈谈工业界的AI" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
   
   
     <h1 class="article-title" itemprop="name">
-      知识蒸馏算法
+      谈谈工业界的AI
     </h1>
   
 
@@ -210,8 +199,8 @@
               <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
         </span>
 
-<a href="/posts/11031.html" class="archive-article-date">
-        <time datetime="2021-03-20T14:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
+<a href="/posts/21887.html" class="archive-article-date">
+        <time datetime="2021-03-20T14:08:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
 </a>
 
   
@@ -224,7 +213,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.6k字</span>
+      <span class="post-count">2.5k字</span>
     </span>
   </span>
 
@@ -233,7 +222,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
+      <span class="post-count">8分</span>
     </span>
   </span>
 </div>
@@ -244,61 +233,65 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>深度学习基于其庞大的参数量，将输入数据抽象成语义级别的特征，如此可用于分类、检测、分割等任务。因此，学术界所发表的算法往往都具有高时间复杂度和高空间复杂度。但是，工业界又无法纯粹的使用学术界发表的算法，因为手机、嵌入式设备其算力与显存资源基本无法运行起这些算法。若对这些算法网络直接压缩，将无法获得原始性能。</p>
+    <p>你听啊秋末的落叶，你听它叹息这离别，只剩我独自领略，海与山 风和月</p>
+<p>你听啊冬至的白雪，你听它掩饰着哽咽，在没有你的世界</p>
 <a id="more"></a>
 
-<p>所以，针对手机等设备的算法应运而生，如MobileNet、ShuffleNet等，其主要依赖于深度可分离卷积层的作用。但是，像HiSi3559A等平台无法支持某些特殊层，此时知识蒸馏算法将是一个不错的选择，将老师模型的知识蒸馏出来，迁移到学生模型中。</p>
-<p>通用pipeline如下：</p>
-<img src="..\images\KD_general.jpg" style="zoom:67%;" />
-
-<h4 id="知识蒸馏"><a href="#知识蒸馏" class="headerlink" title="知识蒸馏"></a>知识蒸馏</h4><p>论文：《Knowledge Distillation: A Survey  》</p>
-<p>在工业界，知识蒸馏首先将一个网络结构压缩至推理耗时达到设备要求的复杂度，作为学生网络；然后使用高复杂度的老师网络结构去帮助学生去学习。因为，不同规格的网络结构从相同数据量中所能提取的知识量是不同的，如此也会导致老师和学生对新知识的泛化能力具有差异性。因此，知识蒸馏的目的就是让学生模型也能吸收到老师模型的知识量，提升自身的泛化性。目前知识蒸馏的算法众多，基于从老师模型中蒸馏出的内容对蒸馏算法进行分类：</p>
-<img src="..\images\KD_catogory.jpg" style="zoom:80%;" />
-
-
-
-<h5 id="基于网络输出的知识蒸馏"><a href="#基于网络输出的知识蒸馏" class="headerlink" title="基于网络输出的知识蒸馏"></a>基于网络输出的知识蒸馏</h5><p>基于网络输出的知识蒸馏主要思想是学生模型模仿老师模型的输出，即用老师的输出作为学生模型的优化方向，因此就约束老师模型和学生模型具有相同的输出结构，分类任务需要有相同的分类数量，检测任务需要有相同的Head结构（YOLO系列算法），其他任务也是。</p>
-<p><strong>SoftTarget知识蒸馏</strong></p>
-<p>论文：《Distilling the Knowledge in a Neural Network》</p>
-<p>该算法使用老师模型的Softmax输出作为学生模型的标签，即以老师的输出作为指导方向，但是，往往老师也会犯错，因此在损失函数的构建中也会加入学生模型的真实标签。另外，该算法在计算Softmax时引入了一个温度因子T，其目的是增大老师输出层分布的信息熵，让负样本也能参与到损失的计算中【注：此SoftLabel操作并不同于LabelSmooth算法，他们的计算目标是不一样的，一个是预测的标签，一个是真实标签，所以负标签所携带的信息量是不同的】，这是因为负样本的概率分布也能带来对学生模型的指导作用，比如：两中手写体的数字2，一个更加类似3，一个更加类似7，那这个手写体分别对3和7的预测概率是不同的，而对于HardLabel来说，他们会同等对待处理。加入温度因子后的Softmax函数如下：</p>
-<img src="..\images\SoftTarget_1.jpg" style="zoom:80%;" />
-
-<p>若温度因子T=1，则退化为普通的Softmax；若T越大，熵越大，分布越均衡，负样本的概率会越大。</p>
-<p>老师模型参与的损失函数如下：</p>
-<p><img src="..%5Cimages%5CSoftTarget_t.jpg"></p>
-<p>学生模型自己的损失函数如下：</p>
-<p><img src="..%5Cimages%5CSoftTarget_s.jpg"></p>
-<p>最终的损失函数：</p>
-<p><img src="..%5Cimages%5CSoftTarget_L.jpg"></p>
-<p>其中，alpha和betta是损失的平衡权重。一般训练过程中，为了保持两部分损失对梯度的更新幅度相同，需要对SoftTarget部分的损失乘以T^2，此权重是基于对两部分损失分别对学生模型输出层logit的梯度计算推导出的。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SoftTarget</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, T</span>):</span></span><br><span class="line">		super(SoftTarget, self).__init__()</span><br><span class="line">		self.T = T</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.kl_div(F.log_softmax(out_s/self.T, dim=<span class="number">1</span>),F.softmax(out_t/self.T, dim=<span class="number">1</span>), reduction=<span class="string">&#x27;batchmean&#x27;</span>)</span><br><span class="line">		<span class="keyword">return</span> loss * self.T * self.T</span><br></pre></td></tr></table></figure>
-
-<p><strong>均方差知识蒸馏</strong></p>
-<p>该损失则是非常直接，直接以老师模型与学生模型的L2距离作为损失来指导学生学习。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MSE</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(Logits, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, out_s, out_t</span>):</span></span><br><span class="line">		loss = F.mse_loss(out_s, out_t)</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
-
-<h5 id="基于网络特征的知识蒸馏"><a href="#基于网络特征的知识蒸馏" class="headerlink" title="基于网络特征的知识蒸馏"></a>基于网络特征的知识蒸馏</h5><p>神经网络的优势是可以提取出各个级别的特征，如浅层特征更多的是目标的轮廓和边缘信息，深层特征更多的是目标语义信息，所以老师模型的中间层或输出层提取的特征表示也都可以作为学生网络的指导方向。</p>
-<p><strong>概率分布迁移知识蒸馏</strong></p>
-<p>论文：《Learning Deep Representations with Probabilistic Knowledge Transfer》</p>
-<p>该算法认为现有的算法忽略了老师模型特征空间的几何结构，如流形结构、相邻样本之间的相似性等。因此，该算法则通过匹配老师与学生模型特征空间的概率分布来指导学生学习老师的知识。</p>
-<img src="..\images\PKT.jpg" style="zoom:80%;" />
-
-<p>计算过程如下：</p>
+<p>在此以歌曲《冬眠》中的一段词进行开篇，如歌词字面意思一般，2019年1月从东北大学毕业后毅然选择投身到AI算法的工作中，起初以应届生进入科大讯飞任职算法引擎开发工程师，后续又以应届生的身份进入浙江大华任职智能算法工程师，至今一直在AI行业思考，学习，沉淀。这两年时间更多的是无尽的加班，远离所谓的生活，在异地恋的世界独自一人爬行。</p>
+<p>在安防行业工作两年，参与过的单模块开发项目有行人非机动车属性识别、行人关键点检测、行人重识别、行人聚档等，现在在智慧厨房解决方案中既担任产品经理又是其中的项目开发者，可以说是全面的参与到工业AI工程师的所有工作中了，业务+算法+工程+部署。因此，通过抛出几个问题来谈谈自己对工业界AI的理解。</p>
+<p>AI在工业界是否是泡沫？不是泡沫。十四五规划中也提到了科技创新的目标，其中AI是一项重要措施，在国家政策面前，不可能会有泡沫的。接下来也具体谈下我的观点，1956年提出AI的概念，在60年后的今天能够大爆发是天时地利人和的必然结果，也是科技进步的象征。所谓的AI可以简单理解为深度学习，深度学习进一步简单理解为多层的神经网络，神经网络相比于传统的机器学习算法，是其可拟合百万级的参数量，形成一个人类也无法感知的高维空间，在这个空间下，也就具有能力去解释这张图像是猫或是狗。高维空间的生成，有两个充分条件，一个是算力，一个是数据，这两者都兼备之后，便在2012年以AlexNet算法的横空出世开启了AI的第二次大门。以安防行业为例，其大部分智能方案也都使用了AI的技术，在用户实际体验中确实得到了效果的大幅度提升。我也相信，在其他行业AI也能引入一种新的技术革命，即使是1%的效率提升，那也会为这个行业产生利益的增长。所以，AI不是泡沫，可以带来行业的进一步提效，但是他并没有那么的神奇，以象棋战胜人类来窥全貌是不对的，像科幻片中的推翻人类，那更是不可能的。因为现在的AI依靠的更多是算力和数据，是数字在反馈机制下的组合，而算法的作用只是让这种组合更加合理。</p>
+<p>AI在工业界的开发流程？在此以安防行业为例，其他行业也仍具参考意义。首先，获取到用户需求，寻找到市场痛点，没有实际需求必然无法推动其向前更新迭代，反而是人力、财力资源的浪费，这也与学术界寻找需要解决的问题不谋而合；其次，就是分析完成此功能的方案设计了，该方案包括集成各个算法模块的数据收集、各个算法模块集成的Pipeline、各个算法模块及整体的测试流程、各个算法模块推理耗时上限、集成所有模块后在设备的部署、最终界面显示，这个就是对业务的把控；然后，将各个功能分发给每个人，完成对应自己的算法开发与工程开发，且测试达标；最终，集成所有模块打包起来，部署到嵌入式设备或服务器设备上展示到客户的界面上。在此仅简单的谈一下简单的流程，整个的开发流程需要一个庞大的团队才能从无到界面显示，而AI算法工程师仅仅是其中的一个小小模块，也代表着一个工作方向，还有其他比如硬件、数据、开发、测试、后台等等方向的人共同参与其中。据我所知，很多公司都是只做方案设计，并将其部分模块拆分出去给各个外包公司。</p>
+<p>AI算法工程师应该具备哪些能力？业务+算法+工程+部署。学生时代的我以为AI算法工程师就只有算法，知道更多的算法，知道更多的训练Tricks，熟悉各个深度学习框架。但是，在实际工作经验中就不这么认为了，只训练模型的只能称之为研究员，若是无法带来革命性的增益和顶会加身，将不具有核心竞争力。当前如此内卷的时代，没有核心竞争力将必然被淘汰。所以，如何建立我们的核心竞争力？那就是具备AI算法工程师的全面能力，业务+算法+工程+部署。业务即可承担技术产品经理的角色，判断需求是否具有可开发性，了解各类算法模块的基础知识，设计整体技术方案，有效与各方人员进行沟通协调；算法即了解各方向算法的经典算法及其算法发展方向，熟悉常用的训练框架；工程即基于推理引擎，调用算法模型，构建出Linux平台的测试demo；部署即熟悉对应平台的开发环境，组织起所有算法模块，在嵌入式设备或服务器上以视频流输入的方式构建起算法结果的终端显示。我深知若想具备以上的能力，非一朝一夕，也需要工作机遇的眷顾，但是形成核心竞争力本身就是一件难上加难的事，不管是以热爱为目的，以未来不焦虑为目的，任何时候都保持持续学习的状态，我相信天道酬勤，纯粹的去做好这件事。</p>
+<p>AI算法模块的开发流程？工作两年来，在这块投入的时间其实是最大的，因为这也是我工作的核心。所以，以下总结下我在新来一个需求之后，是如何开发和输出的。</p>
 <ul>
-<li><p>基于Cosine相似性度量函数，分别计算老师模型和学生模型指定层特征空间下相邻样本的相似性；</p>
-<img src="..\images\PKT_cos.jpg" style="zoom:80%;" />
+<li><p>确定该需求的算法方案，比如是分类、分割、关键点检测、目标检测等；</p>
 </li>
-<li><p>计算相邻样本形成的条件概率分布；</p>
-<img src="..\images\conditional_prob.jpg" style="zoom:80%;" />
+<li><p>整理数据集，数据集在算法训练中扮演这决定性的角色，所以这块需要投入非常大的时间及精力；</p>
+<ul>
+<li>建立数据维度，比如目标场景、图片大小、正负样本比例等；</li>
+<li>是否需要线下增强素材，若素材数据量较少，可采用特殊的增强方式进行线下增强，比如GAN生成；</li>
+<li>建立更符合实际场景需求的测试集，只有测试集更符合实际场景，测试结果才更加具有说服力；</li>
+<li>建立Excel，记录数据集迭代更新的记录；</li>
+</ul>
 </li>
-<li><p>基于KL散度，计算两个概率分布的差异性作为损失；</p>
-<img src="..\images\PKT_KL.jpg" style="zoom:80%;" />
-
-<p>KL散度是量化两种概率分布P和Q之间差异的方式，其是通过使用一个分布Q来近似一个分布P时损失的信息量，而这个信息量就是学生模型距离老师模型之间的差距。</p>
+<li><p>训练初始版本；</p>
+<ul>
+<li>以该方向的经典算法训练的结果测试训练集和测试集是否构建的合理；</li>
+</ul>
+</li>
+<li><p>测试集错误原因分析；</p>
+<ul>
+<li>将预测结果显示在图片上，寻找识别错误的共性问题；</li>
+<li>若是数据的问题，优化数据集；若是算法的问题，优化算法；</li>
+</ul>
+</li>
+<li><p>预研新算法；</p>
+<ul>
+<li>带着解决共性问题的目的去预研新的算法；</li>
+</ul>
+</li>
+<li><p>基于剪枝算法或人工剪枝压缩网络耗时；</p>
+<ul>
+<li>学术界的算法推理耗时往往不满足工业界的耗时要求；</li>
+</ul>
+</li>
+<li><p>基于知识蒸馏恢复剪枝后的算法效果；</p>
+<ul>
+<li>深度学习在减少参数量后，往往效果会发生较大的下降，而知识蒸馏则可在一定程度恢复原始性能；</li>
+</ul>
+</li>
+<li><p>基于Linux开发测试环境编写demo；</p>
+<ul>
+<li>算法模块是要运行在嵌入式设备端或服务器端的，因此需要基于对应平台的引擎调动起模型，而不同平台具有不同的引擎框架。因此，需要首先建立Linux下的开发测试环境；</li>
+</ul>
+</li>
+<li><p>开发业务逻辑；</p>
+<ul>
+<li>算法模块的效果从95%提升到99%的准确率，在实际应用中是不会被客户感知的，因为这仍然是有错误的；因此，在现场测试时需要建立现场的测试指标，而这个指标就需要通过业务逻辑来提升；</li>
+</ul>
 </li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PKTCosSim</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">		super(PKTCosSim, self).__init__()</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, feat_s, feat_t, eps=<span class="number">1e-6</span></span>):</span></span><br><span class="line">		<span class="comment"># Normalize each vector by its norm feat_s:[N,C] feat_t:[N,C]</span></span><br><span class="line">		feat_s_norm = torch.sqrt(torch.sum(feat_s ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_s = feat_s / (feat_s_norm + eps)</span><br><span class="line">		feat_s[feat_s != feat_s] = <span class="number">0</span></span><br><span class="line">		feat_t_norm = torch.sqrt(torch.sum(feat_t ** <span class="number">2</span>, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>))</span><br><span class="line">		feat_t = feat_t / (feat_t_norm + eps)</span><br><span class="line">		feat_t[feat_t != feat_t] = <span class="number">0</span></span><br><span class="line">		<span class="comment"># Calculate the cosine similarity</span></span><br><span class="line">		feat_s_cos_sim = torch.mm(feat_s, feat_s.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		feat_t_cos_sim = torch.mm(feat_t, feat_t.transpose(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">		<span class="comment"># Scale cosine similarity to [0,1]</span></span><br><span class="line">		feat_s_cos_sim = (feat_s_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		feat_t_cos_sim = (feat_t_cos_sim + <span class="number">1.0</span>) / <span class="number">2.0</span></span><br><span class="line">		<span class="comment"># Transform them into probabilities</span></span><br><span class="line">		feat_s_cond_prob = feat_s_cos_sim / torch.sum(feat_s_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		feat_t_cond_prob = feat_t_cos_sim / torch.sum(feat_t_cos_sim, dim=<span class="number">1</span>, keepdim=<span class="literal">True</span>)</span><br><span class="line">		<span class="comment"># Calculate the KL-divergence</span></span><br><span class="line">		loss = torch.mean(feat_t_cond_prob * torch.log((feat_t_cond_prob + eps) / (feat_s_cond_prob + eps)))</span><br><span class="line">		<span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
-
+<p>从事计算机视觉识别行业将近两年，在业务方向，参与了视频结构化方案、智慧厨房方案；在算法方向涉及过目标分类、目标检测、目标关键点检测、多任务学习、目标语义分割、目标跟踪、超分辨率重建等；在工程方向，涉及过Linux开发；在部署方向，涉及过海思、寒武纪等平台。我深知自己在各个方向都只是粗泛的了解，并未能达到精的能力，我也在工作中持续要求自己不仅要提升工作泛化能力，还需提升专项能力。最后以一句话为我的职业生涯建立一个美好的希冀：丈夫处世兮立功名，立功名兮慰平生。</p>
 
     
 
@@ -313,7 +306,7 @@
         </li>
         <li>
           <strong>本文链接：</strong>
-          <a href="https://chiyustory.github.io/posts/11031.html" title="知识蒸馏算法" target="_blank">https://chiyustory.github.io/posts/11031.html</a>
+          <a href="https://chiyustory.github.io/posts/21887.html" title="谈谈工业界的AI" target="_blank">https://chiyustory.github.io/posts/21887.html</a>
         </li>
         
         <li>
@@ -335,7 +328,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">故事</a>
         		</li>
       		
 		</ul>
@@ -391,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/11031.html" alt="微信分享二维码"> -->
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/21887.html" alt="微信分享二维码"> -->
     </div>
 </div>
 
@@ -406,18 +399,9 @@
 
 <nav id="article-nav">
   
-    <a href="/posts/21887.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          谈谈工业界的AI
-        
-      </div>
-    </a>
   
-  
-    <a href="/posts/56651.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">深度学习的损失函数</div>
+    <a href="/posts/11031.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">知识蒸馏算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
