@@ -10,19 +10,19 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
+  <meta name="description" content="介绍在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习训练策略">
 <meta property="og:url" content="https://chiyustory.github.io/posts/207.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
+<meta property="og:description" content="介绍在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://chiyustory.github.io/images/tricks_2.jpg">
 <meta property="og:image" content="https://chiyustory.github.io/images/SoftTarget.jpg">
 <meta property="og:image" content="https://chiyustory.github.io/images/tricks_1.jpg">
 <meta property="og:image" content="https://chiyustory.github.io/images/tricks_3.jpg">
 <meta property="article:published_time" content="2021-04-20T12:27:03.000Z">
-<meta property="article:modified_time" content="2021-04-21T14:30:25.365Z">
+<meta property="article:modified_time" content="2021-04-21T14:31:56.764Z">
 <meta property="article:author" content="ChiYu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -238,7 +238,7 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <p>在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。</p>
+    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。</p>
 <a id="more"></a>
 
 <h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><p>数据是获得一个具有泛化能力的模型是知识源泉，在这一部分的投入时间应该占据整个开发过程的一半。</p>
