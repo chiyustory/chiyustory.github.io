@@ -6,20 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://chiyustory.github.io">
-  <title>Archives: 2021/3 | 池鱼的故事</title>
+  <title>深度学习训练策略 | 池鱼的故事</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="一个记录故事的地方">
-<meta property="og:type" content="website">
-<meta property="og:title" content="池鱼的故事">
-<meta property="og:url" content="https://chiyustory.github.io/archives/2021/03/index.html">
+  <meta name="description" content="在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习训练策略">
+<meta property="og:url" content="https://chiyustory.github.io/posts/207.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="一个记录故事的地方">
+<meta property="og:description" content="在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://chiyustory.github.io/images/tricks_2.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/SoftTarget.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/tricks_1.jpg">
+<meta property="og:image" content="https://chiyustory.github.io/images/tricks_3.jpg">
+<meta property="article:published_time" content="2021-04-20T12:27:03.000Z">
+<meta property="article:modified_time" content="2021-04-21T14:30:25.365Z">
 <meta property="article:author" content="ChiYu">
-<meta property="article:tag" content="计算机视觉 嵌入式">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chiyustory.github.io/images/tricks_2.jpg">
   
     <link rel="alternative" href="/atom.xml" title="池鱼的故事" type="application/atom+xml">
   
@@ -178,41 +185,120 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-深度学习训练策略" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/10998.html" class="archive-article-date">
-        <time datetime="2021-03-31T13:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-31</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/10998.html" target="_blank">关键点检测算法</a>
   
+    <h1 class="article-title" itemprop="name">
+      深度学习训练策略
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/posts/207.html" class="archive-article-date">
+        <time datetime="2021-04-20T12:27:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.4k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">4分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>在工业界，解决一个问题的方式往往是算法+逻辑，但是个人认为，更好的算法将有利于减少逻辑的开发量，但是逻辑的开发也是必不可少的，尤其是对于向用户推送报警业务，这是因为从用户的角度，其对于算法的准确率从95%到99%是感知不到的，而逻辑可以在牺牲召回率的前提下将此准确率再次提升。为了获得一个更优的模型，在训练过程中也是具有一定的优化技巧的。</p>
+<a id="more"></a>
+
+<h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><p>数据是获得一个具有泛化能力的模型是知识源泉，在这一部分的投入时间应该占据整个开发过程的一半。</p>
+<h5 id="维度均衡"><a href="#维度均衡" class="headerlink" title="维度均衡"></a>维度均衡</h5><p>明确算法要解决的问题，建立多维度的训练集和测试集，维度应该尽可能的覆盖现实部署的各种场景，并且各个维度的数据量应达到一定的程度，如此才可满足我们的泛化目标，比如对行人目标上衣颜色属性的识别，需要建立维度：<strong>目标大小、白天黑夜、光照、角度</strong>等。</p>
+<h5 id="线下增强"><a href="#线下增强" class="headerlink" title="线下增强"></a>线下增强</h5><p>当数据量不均衡时或者数据量较少时，需要在线下以<strong>重采样、降采样、贴图、生成、模拟、爬虫</strong>等操作来获取尽可能多的数据量。</p>
+<h5 id="线上增强"><a href="#线上增强" class="headerlink" title="线上增强"></a>线上增强</h5><ul>
+<li>为了应对目标光照等变化，需要对图像进行<strong>亮度、对比度</strong>等进行增强；</li>
+<li>为了应对前置模块的误差，需要对图像进行<strong>随机裁剪</strong>、<strong>随机缩放</strong>等进行增强；</li>
+<li>为了应对目标遮挡等变化，需要对图像进行<strong>目标擦除</strong>等进行增强，常用方法有RandomErase、GridMask；</li>
+<li>在目标检测方向，为了应对小目标，大BatchSize的问题，需要对图像进行<strong>Masic</strong>进行增强，即将4张图片组合为一张图片，从而在一张图片中获得小目标和多个目标；</li>
+</ul>
+<h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><h5 id="减少过拟合"><a href="#减少过拟合" class="headerlink" title="减少过拟合"></a>减少过拟合</h5><ul>
+<li>Dropout：应用于全连接层，随机置一定比例的神经元失活（值为0），降低神经元彼此的强关联性；</li>
+<li>Dropblock：应用于卷积层，随机置特征图中的某一块区域失活，迫使网络可以学习到其他区域的信息，有利于提取到更加丰富的全局特征；</li>
+</ul>
+<h5 id="增加感受野"><a href="#增加感受野" class="headerlink" title="增加感受野"></a>增加感受野</h5><p>使用不同大小的卷积核可获取到不同大小的感受野，而对不同感受野的特征图进行融合，将有利于提取到更加丰富的语义特征，比如Inception结构、SPP层，即通过对输入特征以不同大小的卷积核进行提取特征，然后进行Concat获得输出特征图；</p>
+<h5 id="注意力模块"><a href="#注意力模块" class="headerlink" title="注意力模块"></a>注意力模块</h5><p>注意力机制对特征图的信息进行重新加权融合，从而实现更加突出重要信息的目的，如通道注意力SENet、空间注意力CBAM、卷积核注意力SKNet、自注意力Non-Local，还有增大注意力区域的TopDBNet算法；</p>
+<h5 id="特征融合"><a href="#特征融合" class="headerlink" title="特征融合"></a>特征融合</h5><p>神经网络在浅层提取的更多的是目标的轮廓信息，而在深层提取的更多的是目标的语义信息，若将这两者信息再进行融合将丰富特征，更有利于当前任务，比如可在多项任务中应用的HRNet网络，始终维持特征信息的交叉融合；YOLOV4和YOLOV5的Head结构，基于FPN+PAN充分的融合语义特征和空间定位特征；</p>
+<h5 id="标签平滑"><a href="#标签平滑" class="headerlink" title="标签平滑"></a>标签平滑</h5><p>将原始one-hot标签进行软化，分给负样本类别一些概率，让其也能参与到损失计算中，可提供更多的监督信息，有点类似关键点检测任务中的高斯热度图，让更多的位置参与到训练中；</p>
+<img src="..\images\tricks_2.jpg" style="zoom:67%;" />
+
+<h5 id="蒸馏学习"><a href="#蒸馏学习" class="headerlink" title="蒸馏学习"></a>蒸馏学习</h5><p>工业界对模型的时间与空间复杂度都是有一定要求的，因此由于其参数空间较小而无法达到理想效果，因此可通过老师模型指导学生模型进一步提升学生模型的效果；</p>
+<img src="..\images\SoftTarget.jpg" style="zoom:80%;" />
+
+<h5 id="余弦退火学习率"><a href="#余弦退火学习率" class="headerlink" title="余弦退火学习率"></a>余弦退火学习率</h5><p>余弦指学习率以余弦曲线的方式进行递减，退火指学习率快速提升学习率至指定值。当模型收敛到局部最优值，此学习率可使得模型跳出来寻求下一个局部最优值；</p>
+<img src="..\images\tricks_1.jpg" style="zoom:67%;" />
+
+<h5 id="跳层连接"><a href="#跳层连接" class="headerlink" title="跳层连接"></a>跳层连接</h5><p>如ResNet、DenseNet等结构，都以恒等映射的结构跨层连接，当梯度回流的时候，相比于VGG这样的结构，会生成更多的梯度更新组合，即产生了集成模型，让预测结果更具有鲁棒性；</p>
+<h5 id="WithFlooding"><a href="#WithFlooding" class="headerlink" title="WithFlooding"></a>WithFlooding</h5><p>当训练到一定阶段后，训练损失会持续下降，而测试损失会持续上升，因为该模型对训练集逐渐过拟合。因此，设定一个阈值，当损失下降到一定阈值之后，则让其不再按照梯度的方向进行更新，而是给一个反方向梯度反向，让损失在此阈值附近进行RandomWalk，从而期望能跳出局部最优，而进入另一个阶段，使得测试集上的损失能进一步降低；</p>
+<img src="..\images\tricks_3.jpg" style="zoom:80%;" />
+    
+
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          ChiYu
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://chiyustory.github.io/posts/207.html" title="深度学习训练策略" target="_blank">https://chiyustory.github.io/posts/207.html</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          请转载时携带作者信息，非常感谢！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -224,234 +310,107 @@
 		</ul>
 	</div>
 
-          
+    
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://chiyustory.github.io/posts/207.html" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/47169.html" class="archive-article-date">
-        <time datetime="2021-03-30T12:33:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-30</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/posts/33085.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AnchorFree算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/47169.html" target="_blank">模型剪枝算法</a>
-  
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/21887.html" class="archive-article-date">
-        <time datetime="2021-03-20T14:08:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/21887.html" target="_blank">谈谈工业界的AI</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">故事</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/11031.html" class="archive-article-date">
-        <time datetime="2021-03-20T14:00:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/11031.html" target="_blank">知识蒸馏算法</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/56651.html" class="archive-article-date">
-        <time datetime="2021-03-17T14:52:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-17</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/56651.html" target="_blank">深度学习的损失函数</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/posts/5269.html" class="archive-article-date">
-        <time datetime="2021-03-14T06:13:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-14</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/posts/5269.html" target="_blank">YOLO系列算法</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">算法</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -483,8 +442,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
