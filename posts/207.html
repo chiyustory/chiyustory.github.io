@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://chiyustory.github.io/images/tricks_1.jpg">
 <meta property="og:image" content="https://chiyustory.github.io/images/tricks_3.jpg">
 <meta property="article:published_time" content="2021-04-20T12:27:03.000Z">
-<meta property="article:modified_time" content="2021-04-21T14:31:56.764Z">
+<meta property="article:modified_time" content="2021-04-22T00:02:12.562Z">
 <meta property="article:author" content="ChiYu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.4k字</span>
+      <span class="post-count">2.5k字</span>
     </span>
   </span>
 
@@ -227,7 +227,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">4分</span>
+      <span class="post-count">8分</span>
     </span>
   </span>
 </div>
@@ -250,6 +250,7 @@
 <li>为了应对目标遮挡等变化，需要对图像进行<strong>目标擦除</strong>等进行增强，常用方法有RandomErase、GridMask；</li>
 <li>在目标检测方向，为了应对小目标，大BatchSize的问题，需要对图像进行<strong>Masic</strong>进行增强，即将4张图片组合为一张图片，从而在一张图片中获得小目标和多个目标；</li>
 </ul>
+<h5 id="反标注"><a href="#反标注" class="headerlink" title="反标注"></a>反标注</h5><p>当当前任务训练完成后，可使用该模型对训练集、测试集进行反标注，即获得识别错误图片，然后人工校正是否产生标注错误的图片，如此可帮助再次提升一点效果。同时，也可以借助此错误结果进行问题分析，是否是由于数据问题，还是模型复杂度问题等。</p>
 <h4 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h4><h5 id="减少过拟合"><a href="#减少过拟合" class="headerlink" title="减少过拟合"></a>减少过拟合</h5><ul>
 <li>Dropout：应用于全连接层，随机置一定比例的神经元失活（值为0），降低神经元彼此的强关联性；</li>
 <li>Dropblock：应用于卷积层，随机置特征图中的某一块区域失活，迫使网络可以学习到其他区域的信息，有利于提取到更加丰富的全局特征；</li>
@@ -269,6 +270,30 @@
 <h5 id="跳层连接"><a href="#跳层连接" class="headerlink" title="跳层连接"></a>跳层连接</h5><p>如ResNet、DenseNet等结构，都以恒等映射的结构跨层连接，当梯度回流的时候，相比于VGG这样的结构，会生成更多的梯度更新组合，即产生了集成模型，让预测结果更具有鲁棒性；</p>
 <h5 id="WithFlooding"><a href="#WithFlooding" class="headerlink" title="WithFlooding"></a>WithFlooding</h5><p>当训练到一定阶段后，训练损失会持续下降，而测试损失会持续上升，因为该模型对训练集逐渐过拟合。因此，设定一个阈值，当损失下降到一定阈值之后，则让其不再按照梯度的方向进行更新，而是给一个反方向梯度反向，让损失在此阈值附近进行RandomWalk，从而期望能跳出局部最优，而进入另一个阶段，使得测试集上的损失能进一步降低；</p>
 <img src="..\images\tricks_3.jpg" style="zoom:80%;" />
+
+<h5 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h5><p>首先，在和当前任务相关的公开数据集上训练一个模型；然后，使用此模型作为训练当前任务的预训练模型。如此，可令在初始优化阶段提供一个优化反向，加快收敛速度；另外，也可将公开数据集的泛化性能迁移到当前任务中；</p>
+<h5 id="模型复杂度"><a href="#模型复杂度" class="headerlink" title="模型复杂度"></a>模型复杂度</h5><p>在实际部署中，往往对模型的复杂度有一定的要求，此时如何做到复杂度与推理耗时的平衡？若使用相同规模的训练集时，大模型与小模型结果差异不大，则可认为从数据中提取的知识量已达到上限，此时小模型复杂度已足以，而想进一步提升效果，需要增加数据量；大模型与小模型结果差异较大时，此时想进一步提升效果，可以继续增大模型复杂度（深度、宽度）；</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><h5 id="快速调超参"><a href="#快速调超参" class="headerlink" title="快速调超参"></a>快速调超参</h5><p>首先，使用一个较小的训练集，粗调超参数，当模型能收敛且达到理想效果时，则说明此参数具有参考性；然后，使用一个较大的数据集，精调超参数，直至达到实际效果；</p>
+<h5 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h5><p>当对一个新数据集进行训练时，刚开始不要使用一些复杂的网络结构，先使用ResNet18或ResNet50这样的经典网络结构作为Backbone去测试我们的数据、超参数等是否有问题，若能达到一个效果，然后再去考虑优化效果的问题。</p>
+<h5 id="梯度裁剪"><a href="#梯度裁剪" class="headerlink" title="梯度裁剪"></a>梯度裁剪</h5><p>在梯度回传时，为了稳定权重的更新幅度，可以对梯度进行裁剪，即设置梯度L2范数的上限：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line">outputs = model(data)</span><br><span class="line">loss= loss_fn(outputs, target)</span><br><span class="line">optimizer.zero_grad()</span><br><span class="line">loss.backward()</span><br><span class="line"><span class="comment"># max_norm:梯度的最大范数 norm_type:L2范数</span></span><br><span class="line">nn.utils.clip_grad_norm_(model.parameters(), max_norm=<span class="number">20</span>, norm_type=<span class="number">2</span>)</span><br><span class="line">optimizer.step()</span><br></pre></td></tr></table></figure>
+
+<h5 id="测试模型"><a href="#测试模型" class="headerlink" title="测试模型"></a>测试模型</h5><p>Pytorch框架在推理过程中，会对Tensor自动计算梯度，也就会对Tensor进行临时存储，如此会多占据内存，因此若能关闭梯度计算，则可以节省内存，而使用更大的BatchSize推理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h5><p>在网络的训练过程中，可以人为定义指定阶段衰减学习率，逐步进入局部最优区域</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"><span class="comment"># 每过10个epoch，学习率乘以0.1</span></span><br><span class="line">scheduler = lr_scheduler.StepLR(optimizer, <span class="number">10</span>, <span class="number">0.1</span>)  </span><br><span class="line"><span class="comment"># 训练过程</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> n_epoch:</span><br><span class="line">    scheduler.step()</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="冻结层"><a href="#冻结层" class="headerlink" title="冻结层"></a>冻结层</h5><p>在多任务训练过程中，为了确保主要任务的效果，往往是需要冻结Backbone层参数更新，而对各任务的分支进行独立训练</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改梯度更新标志位</span></span><br><span class="line"><span class="keyword">for</span> name, value <span class="keyword">in</span> model.named_parameters():</span><br><span class="line">    <span class="keyword">if</span> name <span class="keyword">in</span> no_grad:</span><br><span class="line">        value.requires_grad = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        value.requires_grad = <span class="literal">True</span></span><br><span class="line"><span class="comment"># 过滤不需更新的参数</span></span><br><span class="line">optimizer = optim.Adam(filter(<span class="keyword">lambda</span> p: p.requires_grad, model.parameters()), lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="不同层使用不同的学习率"><a href="#不同层使用不同的学习率" class="headerlink" title="不同层使用不同的学习率"></a>不同层使用不同的学习率</h5><p>在深层结构中往往会使用相比于浅层更大的学习率，因为深层结构已经获得了目标的语义特征，且基于浅层特征已经提供了一个优化方向，可以以更大的步幅去尝试新的优化方向</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 划分不同学习率的层</span></span><br><span class="line">conv1_params = []</span><br><span class="line">conv2_params = []</span><br><span class="line"><span class="keyword">for</span> name, parms <span class="keyword">in</span> net.named_parameters():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;convolution1&quot;</span> <span class="keyword">in</span> name:</span><br><span class="line">        conv1_params += [parms]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        conv2_params += [parms]</span><br><span class="line"><span class="comment"># 优化器中指定学习率</span></span><br><span class="line">optimizer = optim.Adam([&#123;<span class="string">&quot;params&quot;</span>: conv1_params, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.01</span>&#125;,&#123;<span class="string">&quot;params&quot;</span>: conv2_params, <span class="string">&#x27;lr&#x27;</span>: <span class="number">0.001</span>&#125;,],</span><br><span class="line">    					weight_decay=<span class="number">1e-3</span>,)</span><br></pre></td></tr></table></figure>
+
+<h5 id="参数初始化"><a href="#参数初始化" class="headerlink" title="参数初始化"></a>参数初始化</h5><p>当我们的任务某些层无法使用预训练模型权重时，需要自己应用权重初始化的方式对其进行初始化，这个对结果还是有一定的影响的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, m <span class="keyword">in</span> self.layers.named_modules():</span><br><span class="line">    <span class="keyword">if</span> isinstance(m, nn.ConvTranspose2d):</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.001</span>)</span><br><span class="line">        <span class="keyword">if</span> self.deconv_with_bias:</span><br><span class="line">            nn.init.constant_(m.bias, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> isinstance(m, nn.Conv2d):</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.001</span>)</span><br><span class="line">        nn.init.constant_(m.bias, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elif</span> isinstance(m, nn.BatchNorm2d):</span><br><span class="line">        nn.init.constant_(m.weight, <span class="number">1</span>)</span><br><span class="line">        nn.init.constant_(m.bias, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
     
 
     
