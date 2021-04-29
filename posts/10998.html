@@ -10,15 +10,15 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="介绍自上而下基于回归的方法基于热度图的方法Hourglass CPN HRNet SimpleBaseline 自下而上AlphaPose pass OpenPose pass 评价方式&amp;#x50;&amp;#x43;&amp;#75;&amp;#64;&amp;#x30;&amp;#x2e;&amp;#x35;Percentage of Correct Keypoints，该指标表示基于归一化后的欧式距离平均每个人关键点预测正确数量的比例。">
+  <meta name="description" content="介绍关键点检测算法是获取到人体关节点的位置，如眼、鼻、耳、肘、臀、膝盖等，基于其位置，便可通过逻辑代码获取人体行为，从而应用于具体业务中。目前的关键点检测算法，多是以深度学习提取特征，然后为每一个关键点预测一张特征图，经过后处理合并为人体关键点位置图。当一张图像中多个人体目标时，若是首先对每个人体进行检测，然后通过关键点检测算法获取位置图，称之为自上而下的算法；若是首先获取所有人的关键点检测位置，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关键点检测算法">
 <meta property="og:url" content="https://chiyustory.github.io/posts/10998.html">
 <meta property="og:site_name" content="池鱼的故事">
-<meta property="og:description" content="介绍自上而下基于回归的方法基于热度图的方法Hourglass CPN HRNet SimpleBaseline 自下而上AlphaPose pass OpenPose pass 评价方式&amp;#x50;&amp;#x43;&amp;#75;&amp;#64;&amp;#x30;&amp;#x2e;&amp;#x35;Percentage of Correct Keypoints，该指标表示基于归一化后的欧式距离平均每个人关键点预测正确数量的比例。">
+<meta property="og:description" content="介绍关键点检测算法是获取到人体关节点的位置，如眼、鼻、耳、肘、臀、膝盖等，基于其位置，便可通过逻辑代码获取人体行为，从而应用于具体业务中。目前的关键点检测算法，多是以深度学习提取特征，然后为每一个关键点预测一张特征图，经过后处理合并为人体关键点位置图。当一张图像中多个人体目标时，若是首先对每个人体进行检测，然后通过关键点检测算法获取位置图，称之为自上而下的算法；若是首先获取所有人的关键点检测位置，">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-31T13:17:50.000Z">
-<meta property="article:modified_time" content="2021-04-21T14:31:04.704Z">
+<meta property="article:modified_time" content="2021-04-29T10:54:06.995Z">
 <meta property="article:author" content="ChiYu">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
       <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
       <i class="icon-statistics"></i>
       <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">231字</span>
+      <span class="post-count">633字</span>
     </span>
   </span>
 
@@ -222,7 +222,7 @@
     <span class="post-meta-item-icon">
       <i class="icon-book icon"></i>
       <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">1分</span>
+      <span class="post-count">2分</span>
     </span>
   </span>
 </div>
@@ -233,15 +233,27 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><h4 id="自上而下"><a href="#自上而下" class="headerlink" title="自上而下"></a>自上而下</h4><h5 id="基于回归的方法"><a href="#基于回归的方法" class="headerlink" title="基于回归的方法"></a>基于回归的方法</h5><h5 id="基于热度图的方法"><a href="#基于热度图的方法" class="headerlink" title="基于热度图的方法"></a>基于热度图的方法</h5><p><strong>Hourglass</strong></p>
+    <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>关键点检测算法是获取到人体关节点的位置，如眼、鼻、耳、肘、臀、膝盖等，基于其位置，便可通过逻辑代码获取人体行为，从而应用于具体业务中。目前的关键点检测算法，多是以深度学习提取特征，然后为每一个关键点预测一张特征图，经过后处理合并为人体关键点位置图。当一张图像中多个人体目标时，若是首先对每个人体进行检测，然后通过关键点检测算法获取位置图，称之为自上而下的算法；若是首先获取所有人的关键点检测位置，然后经过聚类获取每个人体位置图，称之为自下而上的算法。</p>
+<a id="more"></a>
+
+<p>​    <a target="_blank" rel="noopener" href="https://github.com/chiyustory/pedestrian-pose-estimation">代码</a></p>
+<h4 id="自上而下"><a href="#自上而下" class="headerlink" title="自上而下"></a>自上而下</h4><p>基于GroundTruth的生成过程，继续将其分类为基于回归的方法和基于热度图的方法。</p>
+<ul>
+<li>基于回归的方法：以FC层直接预测关键点位置；</li>
+<li>基于热度图的方法：每个关键点生成一张热度图（概率图），若使用高斯核的方式，则越靠近关键点的位置，值越大；</li>
+</ul>
+<p>基于回归的方法，预测回归的位置是相对于全图的offset，较难学习，监督信息少，而导致较难收敛，因此最后效果也不会好；而基于热度图的方法，则是为每个关键点提供了一个范围的监督信息，增加了监督信息，因此收敛快，效果也会更好。</p>
+<h5 id="基于回归的方法"><a href="#基于回归的方法" class="headerlink" title="基于回归的方法"></a>基于回归的方法</h5><p>pass</p>
+<h5 id="基于热度图的方法"><a href="#基于热度图的方法" class="headerlink" title="基于热度图的方法"></a>基于热度图的方法</h5><p><strong>Hourglass</strong></p>
+<p>论文：《Stacked Hourglass Networks for Human Pose Estimation》</p>
+<p>pass</p>
 <p><strong>CPN</strong></p>
+<p>pass</p>
 <p><strong>HRNet</strong></p>
+<p>pass</p>
 <p><strong>SimpleBaseline</strong></p>
-<h4 id="自下而上"><a href="#自下而上" class="headerlink" title="自下而上"></a>自下而上</h4><p><strong>AlphaPose</strong></p>
 <p>pass</p>
-<p><strong>OpenPose</strong></p>
-<p>pass</p>
-<h4 id="评价方式"><a href="#评价方式" class="headerlink" title="评价方式"></a>评价方式</h4><h5 id="x50-x43-75-64-x30-x2e-x35"><a href="#x50-x43-75-64-x30-x2e-x35" class="headerlink" title="&#x50;&#x43;&#75;&#64;&#x30;&#x2e;&#x35;"></a><a href="mailto:&#x50;&#x43;&#75;&#64;&#x30;&#x2e;&#x35;">&#x50;&#x43;&#75;&#64;&#x30;&#x2e;&#x35;</a></h5><p>Percentage of Correct Keypoints，该指标表示基于归一化后的欧式距离平均每个人关键点预测正确数量的比例。</p>
+<h4 id="评价方式"><a href="#评价方式" class="headerlink" title="评价方式"></a>评价方式</h4><h5 id="80-x43-75-x40-x30-x2e-53"><a href="#80-x43-75-x40-x30-x2e-53" class="headerlink" title="&#80;&#x43;&#75;&#x40;&#x30;&#x2e;&#53;"></a><a href="mailto:&#80;&#x43;&#75;&#x40;&#x30;&#x2e;&#53;">&#80;&#x43;&#75;&#x40;&#x30;&#x2e;&#53;</a></h5><p>Percentage of Correct Keypoints，该指标表示基于归一化后的欧式距离平均每个人关键点预测正确数量的比例。</p>
 <p>计算步骤如下：</p>
 <ul>
 <li>计算每个人预测关键点位置与真实关键点位置的欧式距离；</li>
